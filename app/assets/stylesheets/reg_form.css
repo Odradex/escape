@@ -22,22 +22,17 @@
   z-index: 2;
 }
 
-.form-signup input[id="user_name"] {
+.form-signup .field_top {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.form-signup input[id="user_email"] {
+.form-signup .field_middle {
   margin-bottom: -1px;
   border-radius: 0;
 }
-.form-signup input[id="user_password"] {
-  margin-bottom: -1px;
-  border-radius: 0;
-}
-.form-signup input[id="user_password_confirmation"] {
+.form-signup .field_bottom {
   margin-bottom: 15px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-

@@ -1,17 +1,17 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-signup text-center"}) do |f| %>
   <%= image_tag 'logo-small.png' %>
-  <h1 class="h3 mt-2 font-weight-normal">Регистрация</h1>
+  <h1 class="h3 mt-2 pb-3 font-weight-normal">Регистрация</h1>
   <%= render "devise/shared/error_messages", resource: resource %>
     <%= f.label :name, class: 'sr-only'%>
-    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ФИО", class: "form-control" %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ФИО", class: "field_top form-control" %>
 
     <%= f.label :email, class: 'sr-only' %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "form-control" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "form-control field_middle" %>
 
     <%= f.label :password, class: 'sr-only' %>
-    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Пароль", class: "form-control" %>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Пароль", class: "form-control field_middle" %>
 
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Подтверждение пароля", class: "form-control" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Подтверждение пароля", class: "form-control field_bottom" %>
 
     <%= f.submit "Зарегестрироваться", class: "btn btn-lg btn-primary btn-block" %>
 
