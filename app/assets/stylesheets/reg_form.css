@@ -22,17 +22,21 @@
   z-index: 2;
 }
 
-.form-signup input[id="inputName"] {
+.form-signup input[id="user_name"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.form-signup input[id="inputEmail"] {
+.form-signup input[id="user_email"] {
   margin-bottom: -1px;
   border-radius: 0;
 }
-.form-signup input[id="inputPassword"] {
-  margin-bottom: 10px;
+.form-signup input[id="user_password"] {
+  margin-bottom: -1px;
+  border-radius: 0;
+}
+.form-signup input[id="user_password_confirmation"] {
+  margin-bottom: 15px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
