@@ -1,0 +1,19 @@
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form-signup text-center") do |f| %>
+  <%= image_tag 'logo-small.png' %>
+  <h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
+  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= f.label :email, class: 'sr-only' %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "form-control" %>
+
+    <%= f.label :password, class: 'sr-only' %>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Пароль", class: "form-control" %>
+
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Подтверждение пароля", class: "form-control" %>
+
+    <%= f.submit "Зарегестрироваться", class: "btn btn-lg btn-primary btn-block" %>
+
+<% end %>
+
+<%= render "devise/shared/links" %>
