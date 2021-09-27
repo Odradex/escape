@@ -3,11 +3,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  enum role: [:user, :manager, :admin]
+  enum role: [:customer, :manager, :admin]
   after_initialize :set_default_role, if: :new_record?
 
   def set_default_role
-    self.role ||= :student
+    self.role ||= :customer
   end
 
 end
