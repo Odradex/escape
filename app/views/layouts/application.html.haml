@@ -22,12 +22,12 @@
             %li
               = link_to current_user.name, edit_user_registration_path, class: "nav-link"
             %li.nav-item
-              = link_to 'Выйти', destroy_user_session_path, method: :delete, class: "nav-link"
+              = link_to 'Sign out', destroy_user_session_path, method: :delete, class: "nav-link"
           - else
             %li.nav-item
-              = link_to 'Войти', new_user_session_path, class: "nav-link"
+              = link_to 'Sign in', new_user_session_path, class: "nav-link"
             %li.nav-item
-              = link_to 'Зарегестрироваться', new_user_registration_path, class: "nav-link"
+              = link_to 'Sign up', new_user_registration_path, class: "nav-link"
     .container
       %p.notice= notice
       %p.alert= alert
