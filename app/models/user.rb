@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
   validates :name, presence: true, on: :create
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
