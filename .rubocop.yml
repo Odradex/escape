@@ -31,12 +31,8 @@ Layout/LineLength:
   Exclude:
     - app/views/**/*
 
-Metrics/MethodLength:
-  Max: 20
-
 Metrics/ClassLength:
   Max: 1500
-
 
 Rails/UnknownEnv:
   Environments:
