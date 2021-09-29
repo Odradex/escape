@@ -26,6 +26,7 @@ gem 'bootstrap-sass'
 gem 'carrierwave', '~> 2.0'
 gem 'devise'
 gem 'haml'
+gem 'listen'
 gem 'mini_magick'
 gem 'rubocop-rails', require: false
 

@@ -35,5 +35,5 @@
 yarn-debug.log*
 .yarn-integrity
 
-/doc
 *.DS_Store
+/public/uploads/user/**/*

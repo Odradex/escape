@@ -1,6 +1,7 @@
 require: rubocop-rails
 
 AllCops:
+  NewCops: enable
   Exclude:
     - db/**/*
     - node_modules/**/*
@@ -15,9 +16,6 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Style/RaiseArgs:
-  EnforcedStyle: compact
-
-Style/ClassAndModuleChildren:
   EnforcedStyle: compact
 
 Rails:
