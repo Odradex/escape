@@ -28,8 +28,6 @@ Documentation:
 
 Layout/LineLength:
   Max: 120
-  Exclude:
-    - app/views/**/*
 
 Metrics/ClassLength:
   Max: 1500
