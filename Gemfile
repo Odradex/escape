@@ -27,7 +27,7 @@ gem 'carrierwave', '~> 2.0'
 gem 'devise'
 gem 'haml'
 gem 'mini_magick'
-gem 'rubocop-rails'
+gem 'rubocop-rails', require: false
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
