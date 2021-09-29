@@ -8,6 +8,7 @@ AllCops:
     - vendor/**/*
     - lib/tasks/**/*
     - config/initializers/**/*
+    - config/environments/**/*
   TargetRubyVersion: 3.0.2
 
 Style/FrozenStringLiteralComment:
@@ -30,14 +31,8 @@ Layout/LineLength:
   Exclude:
     - app/views/**/*
 
-Metrics/MethodLength:
-  Max: 20
-
 Metrics/ClassLength:
   Max: 1500
-
-Metrics/BlockLength:
-  Max: 35
 
 Rails/UnknownEnv:
   Environments:
