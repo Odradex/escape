@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_27_150447) do
+ActiveRecord::Schema.define(version: 2021_10_01_114330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "branches", force: :cascade do |t|
+    t.bigint "manager_id", null: false
+    t.string "adress"
+    t.time "opening_time"
+    t.time "closing_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["manager_id"], name: "index_branches_on_manager_id"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.bigint "owner_id", null: false
+    t.string "adress"
+    t.time "opening_time"
+    t.time "closing_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_id"], name: "index_organizations_on_owner_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -34,4 +54,6 @@ ActiveRecord::Schema.define(version: 2021_09_27_150447) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "branches", "users", column: "manager_id"
+  add_foreign_key "organizations", "users", column: "owner_id"
 end
