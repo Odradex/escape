@@ -9,7 +9,7 @@
           %li= error.full_message
   .field
     = form.label 'Owner'
-    = form.select :user_name, User.pluck(:name), class: 'form-select'
+    = form.select :user_id, User.pluck(:name, :id), class: 'form-select'
   .field
     = form.label :adress
     = form.text_field :adress

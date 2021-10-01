@@ -11,10 +11,10 @@
   %tbody
     - @organizations.each do |organization|
       %tr
-        %td= organization.user_id
+        %td= organization.user.name
         %td= organization.adress
-        %td= organization.opening_time
-        %td= organization.closing_time
+        %td= organization.opening_time.strftime('%H:%M')
+        %td= organization.closing_time.strftime('%H:%M')
         %td= link_to 'Show', organization
         %td= link_to 'Edit', edit_organization_path(organization)
         %td= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' }
