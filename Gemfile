@@ -29,6 +29,7 @@ gem 'haml'
 gem 'listen'
 gem 'mini_magick'
 gem 'rubocop-rails', require: false
+gem 'faker'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

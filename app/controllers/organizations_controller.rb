@@ -19,34 +19,28 @@ class OrganizationsController < ApplicationController
 
   # POST /organizations or /organizations.json
   def create
-    @organization = Organization.new(organization_params)
-
-    respond_to do
-      if @organization.save
-        redirect_to @organization, notice: 'Organization was successfully created.'
-      else
-        render :new, status: :unprocessable_entity
-      end
+    @organization = User.find(organization_params[:user_id]).organizations.new(organization_params)
+    config.logger.debug organization_params
+    if @organization.save
+      redirect_to @organization, notice: 'Organization was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /organizations/1 or /organizations/1.json
   def update
-    respond_to do
-      if @organization.update(organization_params)
-        redirect_to @organization, notice: 'Organization was successfully updated.'
-      else
-        render :edit, status: :unprocessable_entity
-      end
+    if @organization.update(organization_params)
+      redirect_to @organization, notice: 'Organization was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /organizations/1 or /organizations/1.json
   def destroy
     @organization.destroy
-    respond_to do
-      redirect_to organizations_url, notice: 'Organization was successfully destroyed.'
-    end
+    redirect_to organizations_url, notice: 'Organization was successfully destroyed.'
   end
 
   private

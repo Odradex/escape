@@ -8,8 +8,8 @@
         - organization.errors.each do |error|
           %li= error.full_message
   .field
-    = form.label :user_id
-    = form.text_field :user_id
+    = form.label 'Owner'
+    = form.select :user_name, User.pluck(:name), class: 'form-select'
   .field
     = form.label :adress
     = form.text_field :adress
@@ -20,4 +20,4 @@
     = form.label :closing_time
     = form.time_select :closing_time
   .actions
-    = form.submit
+    = form.submit 'Create', class: 'btn btn-primary'
