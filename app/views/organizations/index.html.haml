@@ -1,0 +1,22 @@
+%p#notice= notice
+%h1 Organizations
+%table
+  %thead
+    %tr
+      %th User
+      %th Adress
+      %th Opening time
+      %th Closing time
+      %th{:colspan => "3"}
+  %tbody
+    - @organizations.each do |organization|
+      %tr
+        %td= organization.user_id
+        %td= organization.adress
+        %td= organization.opening_time
+        %td= organization.closing_time
+        %td= link_to 'Show', organization
+        %td= link_to 'Edit', edit_organization_path(organization)
+        %td= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Organization', new_organization_path
