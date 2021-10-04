@@ -13,10 +13,12 @@
   %body
     %nav.navbar.navbar-expand-md.navbar-dark.bg-dark.mb-4
       = image_tag 'logo-small.png', size: '50'
-      %a.navbar-brand.ml-2{href: "#"} ESCAPE
+      %a.navbar-brand.ml-2{href: "/"} ESCAPE
       %button.navbar-toggler{"aria-controls" => "navbarCollapse", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarCollapse", "data-toggle" => "collapse", type: "button"}
         %span.navbar-toggler-icon
       #navbarCollapse.collapse.navbar-collapse
+        %ul.navbar-nav
+          = link_to 'Organizations', organizations_path, class: "nav-link"
         %ul.navbar-nav.ml-auto
           - if user_signed_in?
             %li

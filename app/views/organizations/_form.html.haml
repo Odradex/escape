@@ -1,4 +1,4 @@
-= form_with(model: organization) do |form|
+= form_with(model: organization, html: { class: 'edit-user' }) do |form|
   - if organization.errors.any?
     #error_explanation
       %h2
@@ -7,17 +7,30 @@
       %ul
         - organization.errors.each do |error|
           %li= error.full_message
-  .field
-    = form.label 'Owner'
-    = form.select :user_id, (User.owner + User.admin).pluck(:name, :id), class: 'form-select'
-  .field
+  %hr
+  %h4 Edit info 
+  %p You can edit your organization's information here. Please note that changing business hours will cancel all reservations outside of them.
+  .form-group
+    = form.label :name
+    = form.text_field :name, class: "form-control", placeholder: 'Name'
+  - if current_user.admin?
+    .form-group
+      = form.label 'Owner'
+      = form.select :user_id, (User.owner + User.admin).pluck(:name, :id)
+  .form-group
     = form.label :adress
-    = form.text_field :adress
-  .field
+    = form.text_field :adress, class: "form-control", placeholder: 'Adress'
+  .form-group
     = form.label :opening_time
     = form.time_select :opening_time
-  .field
     = form.label :closing_time
     = form.time_select :closing_time
   .actions
-    = form.submit 'Create', class: 'btn btn-primary'
+    = form.submit 'Submit changes', class: 'btn btn-primary'
+  %hr
+- if delete_avalible
+  .edit-user
+    %h4 Delete organization 
+    %p If you delete an organization, all of it's rooms and reservations will also be deleted. Please make your decision carefully.
+    = button_to 'Delete organization', organization, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    %hr
