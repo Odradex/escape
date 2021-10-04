@@ -24,4 +24,5 @@ User.last.update(role: 2)
     closing_time: '23:00',
     user_id: User.owner.sample.id
   )
+  organization.save!
 end

@@ -3,7 +3,11 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations or /organizations.json
   def index
-    @organizations = Organization.all
+    if current_user.admin?
+      @organizations = Organization.all
+    else
+      @organizations = Organization.select { |org| org.user == current_user }
+    end
   end
 
   # GET /organizations/1 or /organizations/1.json
@@ -52,6 +56,6 @@ class OrganizationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def organization_params
-    params.require(:organization).permit(:user_id, :adress, :opening_time, :closing_time)
+    params.require(:organization).permit(:name, :user_id, :adress, :opening_time, :closing_time)
   end
 end
