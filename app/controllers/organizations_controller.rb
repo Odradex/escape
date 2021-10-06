@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :set_organization, only: %i[show edit update destroy]
+  after_action :verify_authorized
 
   def index
     @organizations = policy_scope(Organization)
