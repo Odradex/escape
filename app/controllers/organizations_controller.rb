@@ -2,23 +2,26 @@ class OrganizationsController < ApplicationController
   before_action :set_organization, only: %i[show edit update destroy]
 
   def index
-    @organizations = if current_user.admin?
-                       Organization.all
-                     else
-                       Organization.where(user: current_user)
-                     end
+    @organizations = policy_scope(Organization)
+    authorize Organization
   end
 
-  def show; end
+  def show
+    authorize @organization
+  end
 
   def new
     @organization = Organization.new
+    authorize @organization
   end
 
-  def edit; end
+  def edit
+    authorize @organization
+  end
 
   def create
     @organization = User.find(organization_params[:user_id]).organizations.new(organization_params)
+    authorize @organization
     if @organization.save
       redirect_to @organization, notice: 'Organization was successfully created.'
     else
@@ -27,6 +30,7 @@ class OrganizationsController < ApplicationController
   end
 
   def update
+    authorize @organization
     if @organization.update(organization_params)
       redirect_to @organization, notice: 'Organization was successfully updated.'
     else
@@ -35,6 +39,7 @@ class OrganizationsController < ApplicationController
   end
 
   def destroy
+    authorize @organization
     @organization.destroy
     redirect_to organizations_url, notice: 'Organization was successfully destroyed.'
   end
