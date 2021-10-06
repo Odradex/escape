@@ -1,5 +1,5 @@
 %h1.mb-3 Organizations
-%table.table.table-hover
+%table.table.table-hover#organizationsTable
   %thead
     %tr
       %th Name
@@ -7,7 +7,7 @@
       %th Adress
       %th Opening time
       %th Closing time
-      %th{:colspan => "2"} Options
+      %th Options
   %tbody
     - @organizations.each do |organization|
       %tr
@@ -16,7 +16,18 @@
         %td= organization.adress
         %td= organization.opening_time.strftime('%H:%M')
         %td= organization.closing_time.strftime('%H:%M')
-        %td= link_to 'Show', organization
-        %td= link_to 'Edit', edit_organization_path(organization)
+        %td
+          = link_to 'Show', organization
+          = link_to 'Edit', edit_organization_path(organization)
 %br/
 = link_to 'New Organization', new_organization_path if current_user.admin?
+
+:javascript
+  $(document).ready( function () {
+      $('#organizationsTable').DataTable({
+        'columnDefs': [{
+            "targets": [5],
+            "orderable": false
+        }]
+      });
+  } );
