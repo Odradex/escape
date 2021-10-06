@@ -3,11 +3,11 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations or /organizations.json
   def index
-    if current_user.admin?
-      @organizations = Organization.all
-    else
-      @organizations = Organization.select { |org| org.user == current_user }
-    end
+    @organizations = if current_user.admin?
+                       Organization.all
+                     else
+                       Organization.select { |org| org.user == current_user }
+                     end
   end
 
   # GET /organizations/1 or /organizations/1.json
