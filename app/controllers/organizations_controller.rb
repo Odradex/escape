@@ -19,10 +19,13 @@ class OrganizationsController < ApplicationController
   end
 
   # GET /organizations/1/edit
-  def edit; end
+  def edit
+    @editing = true
+  end
 
   # POST /organizations or /organizations.json
   def create
+    @editing = false
     @organization = User.find(organization_params[:user_id]).organizations.new(organization_params)
     config.logger.debug organization_params
     if @organization.save

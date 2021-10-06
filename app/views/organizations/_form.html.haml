@@ -8,12 +8,13 @@
         - organization.errors.each do |error|
           %li= error.full_message
   %hr
-  %h4 Edit info 
-  %p You can edit your organization's information here. Please note that changing business hours will cancel all reservations outside of them.
+  - if @editing
+    %h4 Edit info 
+    %p You can edit your organization's information here. Please note that changing business hours will cancel all reservations outside of them.
   .form-group
     = form.label :name
     = form.text_field :name, class: "form-control", placeholder: 'Name'
-  - if current_user.admin?
+  - if current_user.admin? 
     .form-group
       = form.label 'Owner'
       = form.select :user_id, (User.owner + User.admin).pluck(:name, :id)
@@ -26,9 +27,9 @@
     = form.label :closing_time
     = form.time_select :closing_time
   .actions
-    = form.submit 'Submit changes', class: 'btn btn-primary'
+    = form.submit "#{@editing ? 'Update' : 'Create'} organization", class: 'btn btn-primary'
   %hr
-- if delete_avalible
+- if @editing
   .edit-user
     %h4 Delete organization 
     %p If you delete an organization, all of it's rooms and reservations will also be deleted. Please make your decision carefully.
