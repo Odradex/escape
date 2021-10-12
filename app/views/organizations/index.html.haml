@@ -1,5 +1,6 @@
+=javascript_include_tag 'organizations_datatable'
 %h1.mb-3 Organizations
-%table.table.table-hover#organizationsTable
+%table.table.table-hover#organizationsTable{source: organizations_url}
   %thead
     %tr
       %th Name
@@ -21,13 +22,3 @@
     -#       = link_to 'Edit', edit_organization_path(organization)
 %br/
 = link_to 'New Organization', new_organization_path if current_user.admin?
-
-:javascript
-  $(document).ready( function () {
-      $('#organizationsTable').DataTable({
-        'columnDefs': [{
-            "targets": [5],
-            "orderable": false
-        }]
-      });
-  } );

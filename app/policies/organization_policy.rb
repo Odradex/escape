@@ -31,6 +31,10 @@ class OrganizationPolicy < ApplicationPolicy
         scope.where(user: user)
       end
     end
+
+    private
+
+    attr_reader :user, :scope
   end
 
   private

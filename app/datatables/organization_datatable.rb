@@ -4,7 +4,7 @@ class OrganizationDatatable < AjaxDatatablesRails::ActiveRecord
     # or in aliased_join_table.column_name format
     @view_columns ||= {
       name: { source: 'Organization.name', cond: :like },
-      owner: { source: 'Organization.owner', cond: :like },
+      owner: { source: 'Organization.user.name', cond: :like },
       adress: { source: 'Organization.adress', cond: :like },
       opening_time: { source: 'Organization.opening_time', cond: :like },
       closing_time: { source: 'Organization.closing_time', cond: :like }
@@ -12,10 +12,10 @@ class OrganizationDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def data
-    records.map do |_record|
+    records.map do |record|
       {
         name: record.name,
-        owner: record.owner,
+        owner: record.user.name,
         adress: record.adress,
         opening_time: record.opening_time,
         closing_time: record.closing_time
@@ -24,6 +24,6 @@ class OrganizationDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    # User.all
+    options[:organizations].all
   end
 end

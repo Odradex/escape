@@ -3,11 +3,11 @@ class OrganizationsController < ApplicationController
   after_action :verify_authorized
 
   def index
-    @organizations = policy_scope(Organization)
     authorize Organization
+    @organizations = policy_scope(Organization)
     respond_to do |format|
       format.html
-      format.json { render json: UserDatatable.new(params) }
+      format.json { render json: OrganizationDatatable.new(params, organizations: @organizations) }
     end
   end
 
