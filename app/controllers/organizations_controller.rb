@@ -7,7 +7,7 @@ class OrganizationsController < ApplicationController
     @organizations = policy_scope(Organization)
     respond_to do |format|
       format.html
-      format.json { render json: OrganizationDatatable.new(params, organizations: @organizations) }
+      format.json { render json: OrganizationDatatable.new(params, organizations: @organizations, view_context: view_context) }
     end
   end
 

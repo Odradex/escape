@@ -11,7 +11,8 @@ jQuery(document).ready(function() {
       {"data": "owner"},
       {"data": "adress"},
       {"data": "opening_time"},
-      {"data": "closing_time"}
+      {"data": "closing_time"},
+      {"data": "options"},
     ]
     // pagingType is optional, if you want full pagination controls.
     // Check dataTables documentation to learn more about

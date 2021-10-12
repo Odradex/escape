@@ -5,4 +5,7 @@ class ApplicationDecorator < Draper::Decorator
   #   def percent_amount
   #     h.number_to_percentage object.amount, precision: 2
   #   end
+  def simple_time
+    object.strftime('%H:%M')
+  end
 end
