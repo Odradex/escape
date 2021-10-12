@@ -5,6 +5,10 @@ class OrganizationsController < ApplicationController
   def index
     @organizations = policy_scope(Organization)
     authorize Organization
+    respond_to do |format|
+      format.html
+      format.json { render json: UserDatatable.new(params) }
+    end
   end
 
   def show

@@ -9,16 +9,16 @@
       %th Closing time
       %th Options
   %tbody
-    - @organizations.each do |organization|
-      %tr
-        %td= organization.name
-        %td= organization.user.name
-        %td= organization.adress
-        %td= organization.opening_time.strftime('%H:%M')
-        %td= organization.closing_time.strftime('%H:%M')
-        %td
-          = link_to 'Show', organization
-          = link_to 'Edit', edit_organization_path(organization)
+    -# - @organizations.each do |organization|
+    -#   %tr
+    -#     %td= organization.name
+    -#     %td= organization.user.name
+    -#     %td= organization.adress
+    -#     %td= organization.opening_time.strftime('%H:%M')
+    -#     %td= organization.closing_time.strftime('%H:%M')
+    -#     %td
+    -#       = link_to 'Show', organization
+    -#       = link_to 'Edit', edit_organization_path(organization)
 %br/
 = link_to 'New Organization', new_organization_path if current_user.admin?
 
