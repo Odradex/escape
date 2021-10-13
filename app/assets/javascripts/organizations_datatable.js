@@ -14,8 +14,5 @@ jQuery(document).ready(function() {
       {"data": "closing_time"},
       {"data": "options"},
     ]
-    // pagingType is optional, if you want full pagination controls.
-    // Check dataTables documentation to learn more about
-    // available options.
   });
 });

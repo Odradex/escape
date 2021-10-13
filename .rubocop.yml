@@ -10,6 +10,7 @@ AllCops:
     - lib/tasks/**/*
     - config/initializers/**/*
     - config/environments/**/*
+    - lib/templates/rails/jbuilder/**/*
   TargetRubyVersion: 3.0.2
 
 Style/FrozenStringLiteralComment:
@@ -20,6 +21,9 @@ Style/RaiseArgs:
 
 Rails:
   Enabled: true
+
+Naming/AccessorMethodName:
+  Enabled: false
 
 Style/ClassAndModuleChildren:
   Enabled: false
