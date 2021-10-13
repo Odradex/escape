@@ -11,6 +11,8 @@ AllCops:
     - config/initializers/**/*
     - config/environments/**/*
     - lib/templates/rails/jbuilder/**/*
+    - app/assets/javascripts/**/*
+    - app/assets/stylesheets/**/*
   TargetRubyVersion: 3.0.2
 
 Style/FrozenStringLiteralComment:

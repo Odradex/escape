@@ -4,7 +4,7 @@ class OrganizationPolicy < ApplicationPolicy
   end
 
   def show?
-    admin_or_owner
+    admin_or_owner?
   end
 
   def new?
@@ -12,11 +12,11 @@ class OrganizationPolicy < ApplicationPolicy
   end
 
   def destroy?
-    admin_or_owner
+    admin_or_owner?
   end
 
   def update?
-    admin_or_owner
+    admin_or_owner?
   end
 
   def create?
@@ -39,7 +39,7 @@ class OrganizationPolicy < ApplicationPolicy
 
   private
 
-  def admin_or_owner
+  def admin_or_owner?
     user.admin? || @record.user == user
   end
 end
