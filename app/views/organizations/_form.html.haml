@@ -1,0 +1,37 @@
+= form_with(model: organization, html: { class: 'edit-user' }) do |form|
+  - if organization.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(organization.errors.count, "error")
+        prohibited this organization from being saved:
+      %ul
+        - organization.errors.each do |error|
+          %li= error.full_message
+  %hr
+  - if action_name == 'edit'
+    %h4 Edit info 
+    %p You can edit your organization's information here. Please note that changing business hours will cancel all reservations outside of them.
+  .form-group
+    = form.label :name
+    = form.text_field :name, class: "form-control", placeholder: 'Name'
+  - if current_user.admin? 
+    .form-group
+      = form.label 'Owner'
+      = form.select :user_id, (User.owner + User.admin).pluck(:name, :id)
+  .form-group
+    = form.label :adress
+    = form.text_field :adress, class: "form-control", placeholder: 'Adress'
+  .form-group
+    = form.label :opening_time
+    = form.time_select :opening_time
+    = form.label :closing_time
+    = form.time_select :closing_time
+  .actions
+    = form.submit "#{action_name == 'edit' ? 'Update' : 'Create'} organization", class: 'btn btn-primary'
+  %hr
+- if action_name == 'edit'
+  .edit-user
+    %h4 Delete organization 
+    %p If you delete an organization, all of it's rooms and reservations will also be deleted. Please make your decision carefully.
+    = button_to 'Delete organization', organization, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+    %hr

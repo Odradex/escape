@@ -10,6 +10,10 @@ AllCops:
     - lib/tasks/**/*
     - config/initializers/**/*
     - config/environments/**/*
+    - lib/templates/rails/jbuilder/**/*
+    - app/assets/javascripts/**/*
+    - app/assets/stylesheets/**/*
+    - .gitignore
   TargetRubyVersion: 3.0.2
 
 Style/FrozenStringLiteralComment:
@@ -21,11 +25,20 @@ Style/RaiseArgs:
 Rails:
   Enabled: true
 
-Documentation:
+Naming/AccessorMethodName:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
   Enabled: false
 
 Layout/LineLength:
   Max: 120
+
+Metrics/MethodLength:
+  Max: 40
 
 Metrics/ClassLength:
   Max: 1500

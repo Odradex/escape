@@ -6,3 +6,7 @@ haml:
 rubocop:
   config_file: .rubocop.yml
   version: 1.5.2
+
+eslint:
+  config_file: .eslint.yml
+  version: 7.7.0

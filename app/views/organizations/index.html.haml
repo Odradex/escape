@@ -1,0 +1,14 @@
+=javascript_include_tag 'organizations_datatable'
+%h1.mb-3 Organizations
+%table.table.table-hover#organizationsTable{source: organizations_url}
+  %thead
+    %tr
+      %th Name
+      %th Owner
+      %th Adress
+      %th Opening time
+      %th Closing time
+      %th Options
+  %tbody
+%br/
+= link_to 'New Organization', new_organization_path if current_user.admin?
