@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %strong Organization:
+  = @room.organization_id
+%p
+  %strong Number:
+  = @room.number
+%p
+  %strong Size:
+  = @room.size
+%p
+  %strong Capacity:
+  = @room.capacity
+%p
+  %strong Hourly payment:
+  = @room.hourly_payment
+= link_to 'Edit', edit_room_path(@room)
+|
+= link_to 'Back', rooms_path
