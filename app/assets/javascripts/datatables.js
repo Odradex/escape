@@ -60,6 +60,7 @@ $(document).on('turbolinks:before-cache', function() {
   if (dataTable !== null) {
     dataTable.clear();
     dataTable.destroy();
-    return dataTable = null;
+    dataTable = null;
+    return;
   }
 });
