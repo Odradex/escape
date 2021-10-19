@@ -1,16 +1,38 @@
 %p#notice= notice
-%p
-  %strong User:
-  = @organization.user.name
-%p
-  %strong Adress:
-  = @organization.adress
-%p
-  %strong Opening time:
-  = @organization.opening_time
-%p
-  %strong Closing time:
-  = @organization.closing_time
-= link_to 'Edit', edit_organization_path(@organization, false)
-|
-= link_to 'Back', organizations_path
+= link_to '< Back', organizations_path
+%h2.mb-3.mt-2="Viewing organization #{@organization.name}"
+.row
+  .col-3
+    #v-pills-tab.nav.flex-column.nav-pills{"aria-orientation" => "vertical", role: "tablist"}
+      %a#v-pills-info-tab.nav-link.active{"aria-controls" => "v-pills-info", "aria-selected" => "true", "data-toggle" => "pill", href: "#v-pills-info", role: "tab"} Info
+      %a#v-pills-rooms-tab.nav-link{"aria-controls" => "v-pills-rooms", "aria-selected" => "false", "data-toggle" => "pill", href: "#v-pills-rooms", role: "tab"} Rooms
+      %a#v-pills-reservations-tab.nav-link{"aria-controls" => "v-pills-reservations", "aria-selected" => "false", "data-toggle" => "pill", href: "#v-pills-reservations", role: "tab"} Reservations
+      %a#v-pills-settings-tab.nav-link{"aria-controls" => "v-pills-settings", "aria-selected" => "false", "data-toggle" => "pill", href: "#v-pills-settings", role: "tab"} Settings
+  .col-9.border.rounded.bg-light.p-3
+    #v-pills-tabContent.tab-content
+      #v-pills-info.tab-pane.fade.show.active{"aria-labelledby" => "v-pills-info-tab", role: "tabpanel"}
+        %p
+          %strong Owner:
+          = @organization.user.name
+        %p
+          %strong Adress:
+          = @organization.adress
+        %p
+          %strong Opening time:
+          = @organization.opening_time.strftime('%H:%M')
+        %p
+          %strong Closing time:
+          = @organization.closing_time.strftime('%H:%M')
+        =button_to 'Edit info', edit_organization_path(@organization), method: 'get', class: 'btn btn-secondary'
+          
+      #v-pills-rooms.tab-pane.fade{"aria-labelledby" => "v-pills-rooms-tab", role: "tabpanel"} 
+        -@organization.rooms.each do |room|
+          .card{style: "width: 10rem;"}
+            .card-body
+              %h5.card-title Room
+              %p.card-text=room.number
+              =link_to '', room_path(room), class: 'stretched-link'
+      #v-pills-reservations.tab-pane.fade{"aria-labelledby" => "v-pills-reservations-tab", role: "tabpanel"} 
+        function in development
+      #v-pills-settings.tab-pane.fade{"aria-labelledby" => "v-pills-settings-tab", role: "tabpanel"} 
+        function in development
