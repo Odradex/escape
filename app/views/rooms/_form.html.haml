@@ -7,20 +7,26 @@
       %ul
         - room.errors.each do |error|
           %li= error.full_message
-  .field
-    = form.label :organization_id
-    = form.text_field :organization_id
-  .field
-    = form.label :number
-    = form.text_field :number
-  .field
-    = form.label :size
-    = form.text_field :size
-  .field
-    = form.label :capacity
-    = form.text_field :capacity
-  .field
-    = form.label :hourly_payment
-    = form.text_field :hourly_payment
+  = form.label :organization, class: 'form-label'
+  .input-group.mb-3
+    = form.select :organization_id, Organization.pluck(:name, :id), {}, {class: 'custom-select'}
+  = form.label :number, class: 'form-label'
+  .input-group.mb-3
+    = form.text_field :number, class: 'form-control'
+  = form.label :size, class: 'form-label'
+  .input-group.mb-3
+    = form.text_field :size, class: 'form-control'
+    .input-group-append
+      %span.input-group-text m²
+  = form.label :capacity, class: 'form-label'
+  .input-group.mb-3
+    = form.text_field :capacity, class: 'form-control'
+    .input-group-append
+      %span.input-group-text vizitors
+  = form.label :hourly_payment, class: 'form-label'
+  .input-group.mb-3
+    = form.text_field :hourly_payment, class: 'form-control'
+    .input-group-append
+      %span.input-group-text $
   .actions
-    = form.submit
+    = form.submit 'Submit', class: 'btn btn-primary mb-3'
