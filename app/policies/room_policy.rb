@@ -1,26 +1,26 @@
 class RoomPolicy < ApplicationPolicy
   def index?
-    true
+    admin_or_owner?
   end
 
   def show?
-    true
+    admin_or_owner?
   end
 
   def edit?
-    true
+    admin_or_owner?
   end
 
   def new?
-    true
+    admin_or_owner?
   end
 
   def update?
-    true
+    admin_or_owner?
   end
 
   def create?
-    true
+    admin_or_owner?
   end
 
   class Scope < Scope
@@ -31,5 +31,11 @@ class RoomPolicy < ApplicationPolicy
         scope.where(organization.in?(user.organizations))
       end
     end
+  end
+
+  private
+
+  def admin_or_owner?
+    user.admin? || @record.organization.user == user
   end
 end
