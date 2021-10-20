@@ -25,14 +25,20 @@
           = @organization.closing_time.strftime('%H:%M')
         =button_to 'Edit info', edit_organization_path(@organization), method: 'get', class: 'btn btn-secondary'
           
-      #v-pills-rooms.tab-pane.fade{"aria-labelledby" => "v-pills-rooms-tab", role: "tabpanel"} 
-        -@organization.rooms.each do |room|
-          .card{style: "width: 10rem;"}
-            .card-body
-              %h5.card-title Room
-              %p.card-text=room.number
-              =link_to '', room_path(room), class: 'stretched-link'
+      #v-pills-rooms.justify-content-center.tab-pane.fade{'aria-labelledby': "v-pills-rooms-tab", role: "tabpanel"}
+        .row.row-cols-5
+          -@organization.rooms.each do |room|
+            .col.card.border-primary.m-3
+              .card-body
+                %h5.card-title="Room #{room.number}"
+                %p.card-subtitle.text-muted Free
+                %p.card-text
+                =link_to '', room_path(room), class: 'stretched-link'
+          .col.card.border-primary.m-3{style: "width: 6rem;"}
+            .card-body.d-flex.h-100.justify-content-center.align-self-center
+              %p.text-muted Add new room
+              =link_to '', new_room_path, class: 'stretched-link'
       #v-pills-reservations.tab-pane.fade{"aria-labelledby" => "v-pills-reservations-tab", role: "tabpanel"} 
-        function in development
+        Function in development
       #v-pills-settings.tab-pane.fade{"aria-labelledby" => "v-pills-settings-tab", role: "tabpanel"} 
-        function in development
+        Function in development

@@ -19,6 +19,10 @@ class RoomPolicy < ApplicationPolicy
     true
   end
 
+  def create?
+    true
+  end
+
   class Scope < Scope
     def resolve
       if user.admin?
