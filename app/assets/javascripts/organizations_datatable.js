@@ -12,7 +12,7 @@ jQuery(document).ready(function() {
       {"data": "adress"},
       {"data": "opening_time"},
       {"data": "closing_time"},
-      {"data": "options"},
+      {"data": "options", "orderable": false},
     ]
   });
 });

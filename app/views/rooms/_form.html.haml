@@ -1,0 +1,32 @@
+= form_with(model: room, class: 'w-50') do |form|
+  - if room.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(room.errors.count, "error")
+        prohibited this room from being saved:
+      %ul
+        - room.errors.each do |error|
+          %li= error.full_message
+  = form.label :organization, class: 'form-label'
+  .input-group.mb-3
+    = form.select :organization_id, Organization.pluck(:name, :id), {}, {class: 'custom-select'}
+  = form.label :number, class: 'form-label'
+  .input-group.mb-3
+    = form.text_field :number, class: 'form-control'
+  = form.label :size, class: 'form-label'
+  .input-group.mb-3
+    = form.text_field :size, class: 'form-control'
+    .input-group-append
+      %span.input-group-text m²
+  = form.label :capacity, class: 'form-label'
+  .input-group.mb-3
+    = form.text_field :capacity, class: 'form-control'
+    .input-group-append
+      %span.input-group-text vizitors
+  = form.label :hourly_payment, class: 'form-label'
+  .input-group.mb-3
+    = form.text_field :hourly_payment, class: 'form-control'
+    .input-group-append
+      %span.input-group-text $
+  .actions
+    = form.submit 'Submit', class: 'btn btn-primary mb-3'

@@ -1,0 +1,11 @@
+=javascript_include_tag 'rooms_datatable'
+%table#roomsTable.responsive.nowrap.table.table-hover{"data-sort" => "true", "data-source" => "#{url_for(format: :json)}"}
+  %thead
+    %tr
+      %th Organization
+      %th Number
+      %th Size
+      %th Capacity
+      %th Hourly payment
+      %th Options
+  %tbody

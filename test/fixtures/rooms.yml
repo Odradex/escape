@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  organization: one
+  number: 
+  size: 
+  capacity: 
+  hourly_payment: 
+
+two:
+  organization: two
+  number: 
+  size: 
+  capacity: 
+  hourly_payment: 

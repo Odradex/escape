@@ -25,4 +25,14 @@ User.last.update(role: 2)
     user_id: User.owner.sample.id
   )
   organization.save!
+  5.times do | i |
+    room = Room.new(
+      number: i + 1,
+      organization_id: organization.id,
+      size: rand(9..30),
+      capacity: rand(2..12),
+      hourly_payment: rand(4..20)
+    )
+    room.save!
+  end
 end

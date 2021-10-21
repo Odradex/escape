@@ -1,0 +1,42 @@
+%p#notice= notice
+= link_to '< Back', rooms_path
+%h2.mb-3.mt-2="Viewing room №#{@room.number} in #{@room.organization.name} organization"
+.row
+  .col-3
+    #v-pills-tab.nav.flex-column.nav-pills{"aria-orientation": "vertical", role: "tablist"}
+      %a#v-pills-info-tab.nav-link.active{"aria-controls": "v-pills-info", "aria-selected": "true", "data-toggle": "pill", href: "#v-pills-info", role: "tab"} Info
+      %a#v-pills-notifications-tab.nav-link{"aria-controls": "v-pills-notifications", "aria-selected": "false", "data-toggle": "pill", href: "#v-pills-notifications", role: "tab"} Notifications
+      %a#v-pills-reservations-tab.nav-link{"aria-controls": "v-pills-reservations", "aria-selected": "false", "data-toggle": "pill", href: "#v-pills-reservations", role: "tab"} Reservations
+      %a#v-pills-settings-tab.nav-link{"aria-controls": "v-pills-settings", "aria-selected": "false", "data-toggle": "pill", href: "#v-pills-settings", role: "tab"} Settings
+  .col-9.border.rounded.bg-light.p-3
+    #v-pills-tabContent.tab-content
+      #v-pills-info.tab-pane.fade.show.active{"aria-labelledby": "v-pills-info-tab", role: "tabpanel"}
+        .row
+          .col-4
+            %p
+              %strong Organization:
+              = link_to(@room.organization.name, organization_path(@room.organization))
+            %p
+              %strong Size:
+              = @room.size
+              m²
+            %p
+              %strong Capacity:
+              = @room.capacity
+              vizitors
+            %p
+              %strong Hourly payment:
+              = @room.hourly_payment
+              $
+            =button_to 'Edit info', edit_room_url(@room), method: 'get', class: 'btn btn-secondary'
+          .col-8.d-flex.justify-content-end
+            .card.bg-dark.text-white.w-75.d-flex.justify-content-end
+              =image_tag 'room.jpeg', class: 'rounded card-img', style: 'filter: brightness(50%)'
+              .card-img-overlay.d-flex.h-100
+                %h2.text-center.w-100.align-self-center="Room #{@room.number}"
+      #v-pills-notifications.tab-pane.fade{"aria-labelledby": "v-pills-notifications-tab", role: "tabpanel"} 
+        function in development
+      #v-pills-reservations.tab-pane.fade{"aria-labelledby": "v-pills-reservations-tab", role: "tabpanel"} 
+        function in development
+      #v-pills-settings.tab-pane.fade{"aria-labelledby": "v-pills-settings-tab", role: "tabpanel"} 
+        function in development
