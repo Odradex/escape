@@ -1,9 +1,7 @@
-class RoomsController < ApplicationController
+class RoomsController < AuthorizedController
   before_action :set_room, only: %i[show edit update destroy]
-  after_action :verify_authorized
 
   def index
-    @rooms = Room.all
     authorize Room
     respond_to do |format|
       format.html

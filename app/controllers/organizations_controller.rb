@@ -1,10 +1,9 @@
-class OrganizationsController < ApplicationController
+class OrganizationsController < AuthorizedController
   before_action :set_organization, only: %i[show edit update destroy]
-  after_action :verify_authorized
 
   def index
     authorize Organization
-    @organizations = policy_scope(Organization)
+    @organizations = policy_scope(Organization.includes(:user))
     respond_to do |format|
       format.html
       format.json do

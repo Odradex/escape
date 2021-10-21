@@ -1,9 +1,9 @@
 jQuery(document).ready(function() {
-  $('#roomsTable').dataTable({
+  $('#rooms-datatable').dataTable({
     "processing": true,
     "serverSide": true,
     "ajax": {
-      "url": $('#roomsTable').data('source')
+      "url": $('#rooms-datatable').data('source')
     },
     "pagingType": "full_numbers",
     "columns": [

@@ -1,9 +1,9 @@
 jQuery(document).ready(function() {
-  $('#organizationsTable').dataTable({
+  $('#organizations-datatable').dataTable({
     "processing": true,
     "serverSide": true,
     "ajax": {
-      "url": $('#organizationsTable').data('source')
+      "url": $('#organizations-datatable').data('source')
     },
     "pagingType": "full_numbers",
     "columns": [

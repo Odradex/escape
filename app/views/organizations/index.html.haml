@@ -1,6 +1,6 @@
 =javascript_include_tag 'organizations_datatable'
 %h1.mb-3 Organizations
-%table.table.table-hover#organizationsTable{source: organizations_url}
+%table.table.table-hover#organizations-datatable{"data-source" => "#{organizations_path(format: :json)}"}
   %thead
     %tr
       %th Name
