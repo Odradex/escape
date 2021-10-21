@@ -14,16 +14,16 @@ class RoomsController < ApplicationController
   end
 
   def show
-    authorize Room
+    authorize @room
   end
 
   def new
-    authorize Room
     @room = Room.new
+    authorize @room
   end
 
   def edit
-    authorize Room
+    authorize @room
   end
 
   def create
@@ -42,7 +42,7 @@ class RoomsController < ApplicationController
   end
 
   def update
-    authorize Room
+    authorize @room
     respond_to do |format|
       if @room.update(room_params)
         format.html { redirect_to @room, notice: 'Room was successfully updated.' }
@@ -55,7 +55,7 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    authorize Room
+    authorize @room
     @room.destroy
     respond_to do |format|
       format.html { redirect_to rooms_url, notice: 'Room was successfully destroyed.' }
