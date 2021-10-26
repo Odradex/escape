@@ -1,13 +1,10 @@
 %p#notice= notice
 %p
   %strong User:
-  = @reservation.user_id
+  = @reservation.user.name
 %p
   %strong Room:
-  = @reservation.room_id
-%p
-  %strong Date:
-  = @reservation.date
+  = "#{@reservation.room.organization.name} | #{@reservation.room.number}"
 %p
   %strong Start time:
   = @reservation.start_time

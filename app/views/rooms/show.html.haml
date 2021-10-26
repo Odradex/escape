@@ -37,6 +37,7 @@
       #v-pills-notifications.tab-pane.fade{"aria-labelledby": "v-pills-notifications-tab", role: "tabpanel"} 
         function in development
       #v-pills-reservations.tab-pane.fade{"aria-labelledby": "v-pills-reservations-tab", role: "tabpanel"} 
-        function in development
+        =@room.id
+        =link_to 'New reservation', new_reservation_url(room_id: @room.id), class: 'btn btn-primary', method: 'get'
       #v-pills-settings.tab-pane.fade{"aria-labelledby": "v-pills-settings-tab", role: "tabpanel"} 
         function in development

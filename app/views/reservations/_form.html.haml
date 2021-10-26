@@ -10,15 +10,13 @@
       %ul
         - reservation.errors.each do |error|
           %li= error.full_message
+  = form.hidden_field :room_id, value: params[:room_id]
   = form.label :user_id, class: "form-label"
   .input-group.mb-3
     = form.select :user_id, User.pluck(:name, :id), {}, {class: 'selectpicker', 'data-live-search': "true"}
-  = form.label :room_id
-  .input-group.mb-3
-    = form.select :room_id, Room.pluck(Organization.find(:organization_id).name, :id), {}, {class: 'selectpicker', 'data-live-search': "true"}
   .input-group.mb-3
     = form.label :date
-    = form.date_select :date
+    = form.text_field :date, id: 'date'
   .input-group.mb-3
     = form.label :start_time
     = form.time_select :start_time, minute_step: 15
@@ -26,4 +24,7 @@
     = form.label :end_time
     = form.time_select :end_time, minute_step: 15
   .actions
-    = form.submit
+    = form.submit class: 'btn btn-primary mb-2'
+
+:javascript
+  $("#date").datetimepicker();
