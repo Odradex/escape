@@ -4,6 +4,12 @@ class ReservationsController < AuthorizedController
   def index
     @reservations = Reservation.all
     authorize @reservations
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: ReservationDatatable.new(params, view_context: view_context)
+      end
+    end
   end
 
   def show
