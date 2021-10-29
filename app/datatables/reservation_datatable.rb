@@ -12,8 +12,8 @@ class ReservationDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         user: record.user.name,
-        start_time: record.start_time,
-        end_time: record.end_time
+        start_time: record.start_time.strftime('%H:%M'),
+        end_time: record.end_time.strftime('%H:%M')
       }
     end
   end

@@ -18,6 +18,7 @@ class ReservationsController < AuthorizedController
 
   def new
     @reservation = Reservation.new
+    @organization = Room.find(params[:room_id]).organization
     authorize @reservation
   end
 
@@ -67,6 +68,6 @@ class ReservationsController < AuthorizedController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:user_id, :room_id, :date, :start_time, :end_time)
+    params.require(:reservation).permit(:user_id, :room_id, :start_time, :end_time)
   end
 end
