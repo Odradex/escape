@@ -11,7 +11,7 @@ document.addEventListener("turbolinks:load", () => {
     minDate: tomorrow,
     maxDate: tomorrow.fp_incr(90),
     altInput: true,
-    altFormat: "F j, Y",
+    altFormat: "F j, Y H:i",
     enableTime: true,
     time_24hr: true,
     minTime: data["mintime"],

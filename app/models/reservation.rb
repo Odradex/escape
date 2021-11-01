@@ -21,5 +21,4 @@ class Reservation < ApplicationRecord
       day: start_time.day
     )
   end
-
 end
