@@ -18,4 +18,4 @@ document.addEventListener("turbolinks:load", () => {
     maxTime: data["maxtime"],
     minuteIncrement: 15
   })
-})
+})    

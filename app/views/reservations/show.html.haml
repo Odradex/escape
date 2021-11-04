@@ -1,4 +1,3 @@
-%p#notice= notice
 %p
   %strong User:
   = @reservation.user.name
@@ -6,11 +5,9 @@
   %strong Room:
   = "#{@reservation.room.organization.name} | #{@reservation.room.number}"
 %p
-  %strong Start time:
-  = @reservation.start_time
-%p
-  %strong End time:
-  = @reservation.end_time
+  %strong Time:
+  = "#{@reservation.start_time.strftime('%H:%M')}-#{@reservation.end_time.strftime('%H:%M')}"
+
 = link_to 'Edit', edit_reservation_path(@reservation)
 |
 = link_to 'Back', reservations_path

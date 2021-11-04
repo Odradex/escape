@@ -9,7 +9,8 @@ jQuery(document).ready(function() {
     "columns": [
       {"data": "user"},
       {"data": "start_time"},
-      {"data": "end_time"}
+      {"data": "end_time"}, 
+      {"data": "options", "orderable": false},
     ]
   });
 });

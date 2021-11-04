@@ -5,7 +5,6 @@ class ReservationsController < AuthorizedController
     @reservations = Reservation.all
     authorize @reservations
     respond_to do |format|
-      format.html
       format.json do
         render json: ReservationDatatable.new(params, view_context: view_context)
       end
@@ -23,6 +22,7 @@ class ReservationsController < AuthorizedController
   end
 
   def edit
+    @organization = @reservation.room.organization
     authorize @reservation
   end
 
@@ -42,6 +42,8 @@ class ReservationsController < AuthorizedController
   end
 
   def update
+    authorize @reservation
+    @organization = @reservation.room.organization
     respond_to do |format|
       if @reservation.update(reservation_params)
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }

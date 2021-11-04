@@ -11,7 +11,7 @@
       %ul
         - reservation.errors.each do |error|
           %li= error.full_message
-  = form.hidden_field :room_id, value: params[:room_id]
+  = form.hidden_field :room_id, value: params[:room_id] ? params[:room_id] : @reservation.room_id
   .form-group.mb-3
     = form.label :user_id, class: "form-label"
     = form.select :user_id, User.pluck(:name, :id), {}, {class: 'selectpicker', 'data-live-search': "true"}
@@ -20,15 +20,16 @@
     = form.text_field :start_time, id: 'date', class: 'w-25', data: { minTime: @organization.opening_time.strftime('%H:%M'), maxTime: @organization.closing_time.strftime('%H:%M') }
   .form-group.mb-3
     = form.label :end_time
-    = form.text_field :end_time, id: 'end_time'
-    %input.form-control-range.w-25#hours{type: 'range', min: 1, max: 6, onInput: 'update_end_time()'}
+    = form.time_field :end_time, id: 'end_time'
+    /%input.form-control-range.w-25#hours{type: 'range', min: 1, max: 6, onInput: 'update_end_time()'}
   .actions
     = form.submit class: 'btn btn-primary mb-2'
 
 :javascript
   function update_end_time() {
-    var ending_time = $('#date').val()
+    var ending_time = new Date($('#date').getDate())
     var hours = $('#hours').val()
-    end_time.setTime(end_time.getTime() + (hours*60*60*1000));
+    console.log(ending_time)
+    ending_time.setTime(ending_time.getTime() + (hours*60*60*1000));
     $('#end_time').val(ending_time)
   }
