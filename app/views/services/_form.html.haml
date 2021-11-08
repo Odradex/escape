@@ -1,0 +1,23 @@
+= form_with(model: service, class: 'w-50') do |form|
+  - if service.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(service.errors.count, "error")
+        prohibited this service from being saved:
+      %ul
+        - service.errors.each do |error|
+          %li= error.full_message
+  = form.label :category
+  .input-group.mb-3
+    = form.select :category, ServiceCategory.pluck(:name, :id), {}, class: 'selectpicker', data: {liveSearch: 'true'}
+    
+  = form.label :name
+  .input-group.mb-3
+    = form.text_field :name, class: "form-control"
+  = form.label :price
+  .input-group.mb-3
+    = form.text_field :price, class: 'form-control'
+    .input-group-append
+      %span.input-group-text $
+  .actions
+    = form.submit 'Submit', class: 'btn btn-primary'

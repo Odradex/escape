@@ -1,5 +1,3 @@
-%link{href: "https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css", rel: "stylesheet", type: "text/css"}
-%script{src: "https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"}
 =javascript_pack_tag 'datepicker'
 
 = form_with(model: reservation) do |form|
@@ -21,10 +19,11 @@
   .form-group.mb-3
     = form.label :end_time
     = form.time_field :end_time, id: 'end_time'
-    /%input.form-control-range.w-25#hours{type: 'range', min: 1, max: 6, onInput: 'update_end_time()'}
+  .form-group.mb-3
+    =form.select :services, Service.pluck(:name, :id), {}, {class: 'selectpicker', multiple: true, 'data-live-search': "true"}
   .actions
     = form.submit class: 'btn btn-primary mb-2'
-
+    = link_to 'Cancel', room_path(@reservation.room_id), class: 'btn btn-secondary mb-2'
 :javascript
   function update_end_time() {
     var ending_time = new Date($('#date').getDate())
