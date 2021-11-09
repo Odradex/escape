@@ -36,3 +36,22 @@ User.last.update(role: 2)
     room.save!
   end
 end
+
+service_categories = ['Food', 'Consoles', 'Miscellaneous', 'Staff']
+service_categories.each do |category|
+  service_category = ServiceCategory.new(
+    name: category
+  )
+  service_category.save!
+end
+
+5.times do
+  Service.new(
+    name: Faker::Food.dish,
+    price: rand(5..40),
+    category: ServiceCategory.find_by(name: 'Food')
+  )
+end
+
+Service.create(name: 'PS4 Pro', price: 4, category: ServiceCategory.find_by(name: 'Consoles'))
+Service.create(name: 'Xbox One X', price: 4, category: ServiceCategory.find_by(name: 'Consoles'))
