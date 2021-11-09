@@ -46,7 +46,7 @@ service_categories.each do |category|
 end
 
 5.times do
-  Service.new(
+  Service.create(
     name: Faker::Food.dish,
     price: rand(5..40),
     category: ServiceCategory.find_by(name: 'Food')

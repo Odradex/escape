@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-  $('#services_datatable').DataTable({
+  $('#services-datatable').dataTable({
     "processing": true,
     "serverSide": true,
     "ajax": {
@@ -8,8 +8,7 @@ jQuery(document).ready(function() {
     "pagingType": "full_numbers",
     "columns": [
       { "data": "name" },
-      { "data": "price" },
-      { "data": "options", "orderable": false, "searchable": false }
+      { "data": "price" }
     ]
   });
 });

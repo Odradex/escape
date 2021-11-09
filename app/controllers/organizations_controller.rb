@@ -7,6 +7,7 @@ class OrganizationsController < AuthorizedController
     respond_to do |format|
       format.html
       format.json do
+        logger.debug 'HIIIII'
         render json: OrganizationDatatable.new(params, organizations: @organizations, view_context: view_context)
       end
     end
