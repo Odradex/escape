@@ -2,14 +2,16 @@
 = link_to '< Back', organizations_path
 
 %h2.mb-3.mt-2.align-center="Viewing organization #{@organization.name}"
-%nav
+%nav.mb-2
   #nav-tab.nav.nav-tabs{role: "tablist"}
     %a#nav-overview-tab.nav-link.active{"aria-controls": "nav-overview", "aria-selected": "true", "data-toggle": "tab", href: "#nav-overview", role: "tab"} Overview 
+    %a#nav-rooms-tab.nav-link{"aria-controls": "nav-rooms", "aria-selected": "false", "data-toggle": "tab", href: "#nav-rooms", role: "tab"} Rooms
     %a#nav-reservations-tab.nav-link{"aria-controls": "nav-reservations", "aria-selected": "false", "data-toggle": "tab", href: "#nav-reservations", role: "tab"} Reservations
     %a#nav-notifications-tab.nav-link{"aria-controls": "nav-notifications", "aria-selected": "false", "data-toggle": "tab", href: "#nav-notifications", role: "tab"} Notifications
 
 #nav-tabContent.tab-content
-  #nav-overview.tab-pane.fade.show.active{"aria-labelledby": "v-pills-info-tab", role: "tabpanel"}
+  /Overview tab
+  #nav-overview.tab-pane.fade.show.active{"aria-labelledby": "nav-overview", role: "tabpanel"}
     %p
       %strong Owner:
       = @organization.user.name
@@ -23,22 +25,27 @@
       %strong Closing time:
       = @organization.closing_time.strftime('%H:%M')
     =button_to 'Edit info', edit_organization_path(@organization), method: 'get', class: 'btn btn-secondary'
-      
-#v-pills-rooms.justify-content-center.tab-pane.fade{'aria-labelledby': "v-pills-rooms-tab", role: "tabpanel"}
-  .row.row-cols-5
-    -@organization.rooms.each do |room|
-      .col.card.border-primary.m-3
-        .card-body
-          %h5.card-title="Room #{room.number}"
-          %p.card-subtitle.text-muted Free
-          %p.card-text
-          =link_to '', room_path(room), class: 'stretched-link'
-    .col.card.border-primary.m-3{style: "width: 6rem;"}
-      .card-body.d-flex.h-100.justify-content-center.align-self-center
-        %p.text-muted Add new room
-        =link_to '', new_room_path, class: 'stretched-link'
-#v-pills-reservations.tab-pane.fade{"aria-labelledby": "v-pills-reservations-tab", role: "tabpanel"} 
-  #calendar_container
-    = render 'schedule'
-#v-pills-settings.tab-pane.fade{"aria-labelledby": "v-pills-settings-tab", role: "tabpanel"} 
-  Function in development
+  
+  /Rooms tab
+  #nav-rooms.tab-pane.fade{'aria-labelledby': "nav-rooms", role: "tabpanel"}
+    .row.row-cols-5
+      -@organization.rooms.each do |room|
+        .col.card.border-primary.m-3
+          .card-body
+            %h5.card-title="Room #{room.number}"
+            %p.card-subtitle.text-muted Free
+            %p.card-text
+            =link_to '', room_path(room), class: 'stretched-link'
+      .col.card.border-primary.m-3{style: "width: 6rem;"}
+        .card-body.d-flex.h-100.justify-content-center.align-self-center
+          %p.text-muted Add new room
+          =link_to '', new_room_path, class: 'stretched-link'
+  
+  /Reservations tab
+  #nav-reservations.tab-pane.fade{"aria-labelledby": "nav-reservations", role: "tabpanel"} 
+    #calendar_container
+      = render 'schedule'
+    
+  /Notifications tab
+  #nav-notifications.tab-pane.fade{"aria-labelledby": "nav-notifications", role: "tabpanel"} 
+    Function in development
