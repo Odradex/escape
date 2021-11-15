@@ -1,7 +1,6 @@
 class CalendarEventsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_parameters
-  after_action :render_json_response
 
   def index
     events = Event.all
@@ -63,7 +62,7 @@ class CalendarEventsController < ApplicationController
     @rec_type = params['rec_type']
     @event_length = params['event_length']
     @event_pid = params['event_pid']
-    @tid = id
+    @tid = @id
   end
 
   def render_json_response

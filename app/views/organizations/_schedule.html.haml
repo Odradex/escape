@@ -15,7 +15,14 @@
   .dhx_cal_header
   .dhx_cal_data
 :javascript
+  var rooms = "#{raw @rooms_for_select.to_json}"
+  alert(rooms);
   scheduler.config.xml_date="%Y-%m-%d %H:%i";
+  scheduler.config.lightbox.sections=[
+    {name:"description", height:200, map_to:"text", type:"textarea" , focus:true},
+    {name:"time", height:72, type:"time", map_to:"auto"},
+    {name:"select", height:40, map_to:"type", type:"select", options:rooms},
+  ]
   scheduler.init("scheduler_here", new Date(), "day");
   var data_path = "#{calendar_events_path}"
   scheduler.load(data_path, "json");

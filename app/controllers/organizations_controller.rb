@@ -15,6 +15,7 @@ class OrganizationsController < AuthorizedController
 
   def show
     authorize @organization
+    @rooms_for_select = @organization.rooms.map { |room| { key: room.id, label: "Room #{room.number}" } }
   end
 
   def new
