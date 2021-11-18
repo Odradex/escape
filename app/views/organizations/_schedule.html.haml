@@ -4,6 +4,8 @@
 = javascript_include_tag 'ext/dhtmlxscheduler_recurring', 'data-turbolinks-track': true
 .dhx_cal_ltext#user_select
   = select(:user, :user_id, User.pluck(:name, :id), {}, {class: 'selectpicker', 'data-live-search': 'true', 'data-container': 'body'})
+.dhx_cal_ltext#room_select
+  = select(:room, :room_id, @organization.rooms.pluck(:number, :id), {}, {class: 'selectpicker', 'data-container': 'body'})
 #scheduler_here.dhx_cal_container{style: "width:100%; height:800px;"}
   .dhx_cal_navline
     .dhx_cal_prev_button  
@@ -17,35 +19,47 @@
   .dhx_cal_data
 :javascript
   var user_select = $('#user_select')[0].cloneNode(true);
+  var room_select = $('#room_select')[0].cloneNode(true);
   scheduler.form_blocks["user_selector"]={
-    render:function(config){ // config- section configuration object
+    render:function(config){
         return user_select.outerHTML;
     },
     set_value:function(node,value,ev,config){
-        // node - HTML object related to HTML defined above
-        // value - value defined by map_to property
-        // ev - event object
-        // config - section configuration object
-        $("#user_user_id").selectpicker('val', '9');
+        $("#user_user_id").selectpicker('val', value);
     },
     get_value:function(node,ev,config){
-        // node - HTML object related to HTML defined above
-        // event object
-        // config - section configuration object
         return node.querySelector("select").value;
     },
     focus:function(node){
-        // node - HTML object related to HTML defined above
+        node.querySelector("select").value.focus();
+    }
+  };
+
+  scheduler.form_blocks["room_selector"]={
+    render:function(config){
+        return room_select.outerHTML;
+    },
+    set_value:function(node,value,ev,config){
+        $("#room_room_id").selectpicker('val', value);
+    },
+    get_value:function(node,ev,config){
+        return node.querySelector("select").value;
+    },
+    focus:function(node){
         node.querySelector("select").value.focus();
     }
   };
   
   scheduler.config.xml_date="%Y-%m-%d %H:%i";
   scheduler.config.time_step = 15;
+  scheduler.config.details_on_dblclick=true;
+  scheduler.config.details_on_create=true;
+
   scheduler.init("scheduler_here", new Date(), "day");
   scheduler.locale.labels.section_details = "Details";
   scheduler.config.lightbox.sections.shift();
   scheduler.config.lightbox.sections.push({name:"User", height:60, type:"user_selector", map_to:"user_id"});
+  scheduler.config.lightbox.sections.push({name:"Room", height:60, type:"room_selector", map_to:"room_id"});
   var data_path = "#{calendar_events_path}"
   $('.selectpicker').selectpicker();
   scheduler.load(data_path, "json");

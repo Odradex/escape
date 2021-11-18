@@ -7,6 +7,7 @@ jQuery(document).ready(function() {
     },
     "pagingType": "full_numbers",
     "columns": [
+      { "data": "category" },
       { "data": "name" },
       { "data": "price" }
     ]

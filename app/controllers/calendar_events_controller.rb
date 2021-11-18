@@ -4,8 +4,7 @@ class CalendarEventsController < ApplicationController
 
   def index
     events = Event.all
-
-    render json: events.map do |event|
+    events = events.map do |event|
       {
         id: event.id,
         start_date: event.start_date.to_formatted_s(:db),
@@ -13,15 +12,20 @@ class CalendarEventsController < ApplicationController
         text: event.text,
         rec_type: event.rec_type,
         event_length: event.event_length,
-        event_pid: event.event_pid
+        event_pid: event.event_pid,
+        user_id: event.reservation.user_id,
+        room_id: event.reservation.room_id
       }
     end
+    render json: events
   end
 
   def create
     event = Event.create start_date: @start_date, end_date: @end_date,
                          text: @text, rec_type: @rec_type,
                          event_length: @event_length, event_pid: @event_pid
+    event.reservation = Reservation.create user_id: @user_id, room_id: @room_id
+
     @tid = event.id
     @mode = 'deleted' if @rec_type == 'none'
   end
@@ -36,6 +40,8 @@ class CalendarEventsController < ApplicationController
     event.rec_type = @rec_type
     event.event_length = @event_length
     event.event_pid = @event_pid
+    event.reservation.user_id = @user_id
+    event.reservation.room_id = @room_id
     event.save
   end
 
@@ -62,6 +68,8 @@ class CalendarEventsController < ApplicationController
     @rec_type = params['rec_type']
     @event_length = params['event_length']
     @event_pid = params['event_pid']
+    @user_id = params['user_id']
+    @room_id = params['room_id']
     @tid = @id
   end
 

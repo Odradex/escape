@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_14_192556) do
+ActiveRecord::Schema.define(version: 2021_11_18_123801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2021_11_14_192556) do
     t.integer "event_pid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "reservation_id"
+    t.index ["reservation_id"], name: "index_events_on_reservation_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -40,10 +42,10 @@ ActiveRecord::Schema.define(version: 2021_11_14_192556) do
   create_table "reservations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "room_id", null: false
-    t.datetime "start_time"
-    t.datetime "end_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_reservations_on_event_id"
     t.index ["room_id"], name: "index_reservations_on_room_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
@@ -93,8 +95,10 @@ ActiveRecord::Schema.define(version: 2021_11_14_192556) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "events", "reservations"
   add_foreign_key "organizations", "users"
   add_foreign_key "organizations", "users"
+  add_foreign_key "reservations", "events"
   add_foreign_key "reservations", "rooms"
   add_foreign_key "reservations", "users"
   add_foreign_key "rooms", "organizations"
