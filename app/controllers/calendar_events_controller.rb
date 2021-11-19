@@ -3,7 +3,7 @@ class CalendarEventsController < ApplicationController
   before_action :set_parameters
 
   def index
-    events = Event.all
+    events = Event.eager_load(:reservation)
     events = events.map do |event|
       {
         id: event.id,
@@ -31,9 +31,10 @@ class CalendarEventsController < ApplicationController
   end
 
   def update
+    logger.info "UPDATING EVENT"
     Event.where(event_pid: @id).destroy_all if @rec_type != ''
 
-    event = Event.find(@id)
+    event = Event.eager_load(:reservation).find(@id)
     event.start_date = @start_date
     event.end_date = @end_date
     event.text = @text
@@ -42,7 +43,7 @@ class CalendarEventsController < ApplicationController
     event.event_pid = @event_pid
     event.reservation.user_id = @user_id
     event.reservation.room_id = @room_id
-    event.save
+    logger.info event.save
   end
 
   def destroy

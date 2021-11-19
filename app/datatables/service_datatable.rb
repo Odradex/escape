@@ -10,7 +10,7 @@ class ServiceDatatable < AjaxDatatablesRails::ActiveRecord
 
   def view_columns
     @view_columns ||= {
-      category: { source: "ServiceCategory.name", cond: :like, searchable: true, orderable: true },
+      category: { source: "Service.category", cond: :like, searchable: true, orderable: true },
       name: { source: "Service.name", cond: :like, searchable: true, orderable: true },
       price: { source: "Service.price", cond: :like, searchable: true, orderable: true }
     }
@@ -19,7 +19,7 @@ class ServiceDatatable < AjaxDatatablesRails::ActiveRecord
   def data
     records.map do |record|
       {
-        category: record.category.name,
+        category: record.category,
         name: record.name,
         price: record.price
       }
@@ -27,6 +27,6 @@ class ServiceDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    Service.eager_load(:category)
+    Service.all
   end
 end

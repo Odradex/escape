@@ -1,3 +1,4 @@
 class Service < ApplicationRecord
-  belongs_to :category, class_name: 'ServiceCategory', dependent: nil
+  enum category: { Food: 1, Consoles: 2, Miscellaneous: 3, Staff: 4 }
+  has_and_belongs_to_many :reservations
 end

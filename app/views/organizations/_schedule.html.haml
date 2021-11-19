@@ -1,14 +1,18 @@
 = stylesheet_link_tag 'application', media:'all','data-turbolinks-track': true
 = stylesheet_link_tag 'dhtmlxscheduler_material', media:'all','data-turbolinks-track': true
 = javascript_include_tag 'dhtmlxscheduler', 'data-turbolinks-track': true
+= javascript_include_tag 'ext/dhtmlxscheduler_limit', 'data-turbolinks-track': true
 = javascript_include_tag 'ext/dhtmlxscheduler_recurring', 'data-turbolinks-track': true
 .dhx_cal_ltext#user_select
   = select(:user, :user_id, User.pluck(:name, :id), {}, {class: 'selectpicker', 'data-live-search': 'true', 'data-container': 'body'})
 .dhx_cal_ltext#room_select
   = select(:room, :room_id, @organization.rooms.pluck(:number, :id), {}, {class: 'selectpicker', 'data-container': 'body'})
+.dhx_cal_ltext#service_select
+  %select.selectpicker
+    - Service
 #scheduler_here.dhx_cal_container{style: "width:100%; height:800px;"}
   .dhx_cal_navline
-    .dhx_cal_prev_button  
+    .dhx_cal_prev_button
     .dhx_cal_next_button  
     .dhx_cal_today_button
     .dhx_cal_date
@@ -40,6 +44,7 @@
         return room_select.outerHTML;
     },
     set_value:function(node,value,ev,config){
+        alert(value);
         $("#room_room_id").selectpicker('val', value);
     },
     get_value:function(node,ev,config){
@@ -49,11 +54,12 @@
         node.querySelector("select").value.focus();
     }
   };
-  
+
   scheduler.config.xml_date="%Y-%m-%d %H:%i";
   scheduler.config.time_step = 15;
   scheduler.config.details_on_dblclick=true;
   scheduler.config.details_on_create=true;
+  scheduler.config.select = false;
 
   scheduler.init("scheduler_here", new Date(), "day");
   scheduler.locale.labels.section_details = "Details";
@@ -61,7 +67,6 @@
   scheduler.config.lightbox.sections.push({name:"User", height:60, type:"user_selector", map_to:"user_id"});
   scheduler.config.lightbox.sections.push({name:"Room", height:60, type:"room_selector", map_to:"room_id"});
   var data_path = "#{calendar_events_path}"
-  $('.selectpicker').selectpicker();
   scheduler.load(data_path, "json");
 
   //alert(data_path);
