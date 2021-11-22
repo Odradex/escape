@@ -14,7 +14,8 @@ class CalendarEventsController < ApplicationController
         event_length: event.event_length,
         event_pid: event.event_pid,
         user_id: event.reservation.user_id,
-        room_id: event.reservation.room_id
+        room_id: event.reservation.room_id,
+        services: event.reservation.service_ids
       }
     end
     render json: events
@@ -24,14 +25,13 @@ class CalendarEventsController < ApplicationController
     event = Event.create start_date: @start_date, end_date: @end_date,
                          text: @text, rec_type: @rec_type,
                          event_length: @event_length, event_pid: @event_pid
-    event.reservation = Reservation.create user_id: @user_id, room_id: @room_id
+    event.reservation = Reservation.create user_id: @user_id, room_id: @room_id, service_ids: @services
 
     @tid = event.id
     @mode = 'deleted' if @rec_type == 'none'
   end
 
   def update
-    logger.info "UPDATING EVENT"
     Event.where(event_pid: @id).destroy_all if @rec_type != ''
 
     event = Event.eager_load(:reservation).find(@id)
@@ -43,6 +43,7 @@ class CalendarEventsController < ApplicationController
     event.event_pid = @event_pid
     event.reservation.user_id = @user_id
     event.reservation.room_id = @room_id
+    event.reservation.service_ids = @services
     logger.info event.save
   end
 
@@ -71,6 +72,7 @@ class CalendarEventsController < ApplicationController
     @event_pid = params['event_pid']
     @user_id = params['user_id']
     @room_id = params['room_id']
+    @services = params['services']
     @tid = @id
   end
 

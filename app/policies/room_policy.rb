@@ -12,7 +12,7 @@ class RoomPolicy < ApplicationPolicy
   end
 
   def new?
-    admin_or_owner?
+    organization.in?(user.organizations)
   end
 
   def update?
