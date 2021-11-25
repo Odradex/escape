@@ -26,6 +26,7 @@
   .dhx_cal_header
   .dhx_cal_data
 :javascript
+  
   var user_select = $('#user_select')[0].cloneNode(true);
   var room_select = $('#room_select')[0].cloneNode(true);
   var service_select = $('#service_select')[0].cloneNode(true);
@@ -69,7 +70,8 @@
         $("#services-select").selectpicker('val', value);
     },
     get_value:function(node,ev,config){
-        return node.querySelector("select").value;
+        console.log($("#services-select").val());
+        return $("#services-select").val().join(',');
     },
     focus:function(node){
         node.querySelector("select").value.focus();
@@ -82,6 +84,7 @@
   scheduler.config.details_on_create=true;
   scheduler.config.select = false;
 
+
   var startDate = new Date();
   var endDate = new Date();
   startDate.setDate(startDate.getDate()); 
@@ -91,15 +94,16 @@
   scheduler.config.limit_end = new Date (endDate);
   scheduler.attachEvent("onLimitViolation", function (id, obj){
       dhtmlx.message('The date is not allowed');
+      
     });
  
-  scheduler.init("scheduler_here", new Date(), "day");
+  scheduler.init("scheduler_here", new Date(), "week");
   scheduler.locale.labels.section_details = "Details";
   scheduler.config.lightbox.sections.shift();
   scheduler.config.lightbox.sections.push({name:"User", height:60, type:"user_selector", map_to:"user_id"});
   scheduler.config.lightbox.sections.push({name:"Room", height:60, type:"room_selector", map_to:"room_id"});
   scheduler.config.lightbox.sections.push({name:"Services", height:60, type:"service_selector", map_to:"services"});
-  var data_path = "#{calendar_events_path}"
+  var data_path = "#{calendar_events_path(organization: @organization.id)}"
   scheduler.load(data_path, "json");
 
   var dp = new dataProcessor(data_path);
