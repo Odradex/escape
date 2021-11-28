@@ -1,35 +1,25 @@
 =javascript_pack_tag 'datepicker'
+= stylesheet_link_tag 'dhtmlxscheduler_material', media:'all','data-turbolinks-track': true
+= javascript_include_tag 'dhtmlxscheduler', 'data-turbolinks-track': true
+= javascript_include_tag 'ext/dhtmlxscheduler_limit', 'data-turbolinks-track': true
+= javascript_include_tag 'ext/dhtmlxscheduler_recurring', 'data-turbolinks-track': true
 
-= form_with(model: reservation) do |form|
-  - if reservation.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(reservation.errors.count, "error")
-        prohibited this reservation from being saved:
-      %ul
-        - reservation.errors.each do |error|
-          %li= error.full_message
-  - room_id = params[:room_id] ? params[:room_id] : @reservation.room_id
-  = form.hidden_field :room_id, value: room_id
-  .form-group.mb-3
-    = form.label :user_id, class: "form-label"
-    = form.select :user_id, User.pluck(:name, :id), {}, {class: 'selectpicker', 'data-live-search': "true"}
-  .form-group.mb-3
-    = form.label :start_time
-    = form.text_field :start_time, id: 'date', class: 'w-25', data: { minTime: @organization.opening_time.strftime('%H:%M'), maxTime: @organization.closing_time.strftime('%H:%M') }
-  .form-group.mb-3
-    = form.label :end_time
-    = form.time_field :end_time, id: 'end_time'
-  .form-group.mb-3
-    =form.select :services, Service.pluck(:name, :id), {}, {class: 'selectpicker', multiple: true, data: { liveSearch: true,  }}
-  .actions
-    = form.submit class: 'btn btn-primary mb-2'
-    = link_to 'Cancel', room_path(room_id), class: 'btn btn-secondary mb-2'
-:javascript
-  function update_end_time() {
-    var ending_time = new Date($('#date').getDate())
-    var hours = $('#hours').val()
-    console.log(ending_time)
-    ending_time.setTime(ending_time.getTime() + (hours*60*60*1000));
-    $('#end_time').val(ending_time)
-  }
+%h2 Make a reservation
+#organization-section
+  %hr
+  %h4 Organization
+  %p Please select the organization you are reserving for: 
+  = select(:organization, :organization_id, Organization.all.pluck(:name, :id), {}, {class: 'selectpicker w-50'})
+#date-section
+  %hr
+  %h4 Date and time
+  %p Choose a date for the reservation
+  %input.datepicker.form-control.input-lg.input-block.w-50#date
+#time-section
+  %hr
+  %h4 Time
+  %p Choose a time for the reservation
+  #scheduler_here.dhx_cal_container{style: "width:60%; height:800px;"}
+  .dhx_cal_data
+  = Gon::Base.render_data
+  = javascript_include_tag 'calendar_customer_form', 'data-turbolinks-track': true

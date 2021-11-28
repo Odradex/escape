@@ -17,12 +17,10 @@ class ReservationsController < AuthorizedController
 
   def new
     @reservation = Reservation.new
-    @organization = Room.find(params[:room_id]).organization
     authorize @reservation
   end
 
   def edit
-    @organization = @reservation.room.organization
     authorize @reservation
   end
 

@@ -3,8 +3,11 @@ class CalendarEventsController < ApplicationController
   before_action :set_parameters
 
   def index
-    current_organization = params[:organization]
-    events = Event.where(organization_id: current_organization).eager_load(reservation: :services)
+    logger.info "INDEXING EVENTS"
+    current_organization_id = params[:organization_id]
+    gon.organization_id = params['id']
+    gon.use_mode = current_user.customer? ? 'customer' : 'manager'
+    events = Event.where(organization_id: current_organization_id).eager_load(reservation: :services)
     events = events.map do |event|
       {
         id: event.id,
@@ -23,12 +26,13 @@ class CalendarEventsController < ApplicationController
   end
 
   def create
-    logger.info "SERVICES IDS: #{@services.inspect}"
+    logger.info "CREATING EVENT FOR #{@organization_id}"
     event = Event.create start_date: @start_date, end_date: @end_date,
                          text: @text, rec_type: @rec_type,
-                         event_length: @event_length, event_pid: @event_pid
-    event.reservation = Reservation.create user_id: @user_id, room_id: @room_id, service_ids: @services
-    logger.info event.reservation.inspect
+                         event_length: @event_length, event_pid: @event_pid, organization_id: @organization_id
+    @reservation = Reservation.create user_id: @user_id, room_id: @room_id, event: event, service_ids: @services
+    event.reservation = @reservation
+    event.save!
     @tid = event.id
     @mode = 'deleted' if @rec_type == 'none'
   end
@@ -46,7 +50,6 @@ class CalendarEventsController < ApplicationController
     event.reservation.user_id = @user_id
     event.reservation.room_id = @room_id
     event.reservation.service_ids = @services
-    logger.info event.save
   end
 
   def destroy
@@ -74,7 +77,8 @@ class CalendarEventsController < ApplicationController
     @event_pid = params['event_pid']
     @user_id = params['user_id']
     @room_id = params['room_id']
-    @services = params['services'].split(',').map(&:to_i)
+    @services = params['services'].split(',').map(&:to_i) if params['services']
+    @organization_id = params['organization_id']
     @tid = @id
   end
 
