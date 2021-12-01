@@ -27,13 +27,16 @@ class ReservationsController < AuthorizedController
   end
 
   def create
+    authorize Reservation
     @reservation = Reservation.create(
       user_id: current_user.id,
       room_id: params[:room_id],
       event_id: Event.last.id,
       service_ids: params[:service_ids]
     )
-    authorize @reservation
+    services_price = @reservation.services.map(&:price).sum
+    rental_price = ((@reservation.event.end_date - @reservation.event.start_date) / 3600) * @reservation.room.hourly_payment
+    @reservation.update(price: services_price + rental_price)
   end
 
   def update

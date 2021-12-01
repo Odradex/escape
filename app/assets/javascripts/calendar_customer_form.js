@@ -59,9 +59,9 @@ $(document).on("click", "#submit-button", function(){
      },
      success: function(response) {
        console.log(response);
+       document.location.href="/";
      }
  });
- document.location.href="/";
  return false;
 })
 
@@ -85,7 +85,19 @@ scheduler.attachEvent("onLimitViolation", function (id, obj){
 scheduler.attachEvent("onEventSave",function(id,ev,is_new){
   event_start_date = ev.start_date.getTime();
   ev.organization_id = $("#organization_organization_id").val();
-  $("#rental-price").text('Room rental: $' + ev.start_date);
+  $.ajax({
+    url: "/rooms/" + $("#room_room_id").selectpicker("val"),
+    method: "GET",
+    dataType: "json",
+    error: function (xhr, status, error) {
+      console.error('AJAX Error: ' + status + error);
+    },
+    success: function (response) {
+      console.log(response);
+      $("#rental-price").text('Room rental: $' + (Math.abs(ev.end_date - ev.start_date) / 36e5) * response.hourly_payment);
+    }
+  });
+  
   
   return true;
 })

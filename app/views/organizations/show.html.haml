@@ -38,7 +38,7 @@
       .col.card.border-primary.m-3{style: "width: 6rem;"}
         .card-body.d-flex.h-100.justify-content-center.align-self-center
           %p.text-muted Add new room
-          =link_to '', new_room_path, class: 'stretched-link'
+          =link_to '', new_room_path(organization_id: @organization.id), class: 'stretched-link'
   
   /Reservations tab
   #nav-reservations.tab-pane.fade{"aria-labelledby": "nav-reservations", role: "tabpanel"} 

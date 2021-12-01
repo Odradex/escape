@@ -9,7 +9,7 @@
   %hr
   %h4 Organization & room
   %p Please select the organization you are reserving for: 
-  = select(:organization, :organization_id, Organization.all.pluck(:name, :id), {}, {class: 'selectpicker w-50'})
+  = select(:organization, :organization_id, Organization.all.order(name: 'asc').pluck(:name, :id), {}, {class: 'selectpicker w-50', data: {liveSearch: 'true'}})
   %p.mt-2 Please select the room you are reserving:
   = select(:room, :room_id, {}, {}, {class: 'selectpicker w-50'})
 #date-section

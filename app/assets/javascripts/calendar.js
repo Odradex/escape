@@ -1,6 +1,10 @@
 var room_select = $('#room_select')[0].cloneNode(true);
 var user_select = $('#user_select')[0].cloneNode(true);
 var service_select = $('#service_select')[0].cloneNode(true);
+$('#room_select')[0].remove();
+$('#user_select')[0].remove();
+$('#service_select')[0].remove();
+
 scheduler.form_blocks["user_selector"]={
   render:function(config){
       return user_select.outerHTML;

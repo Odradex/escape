@@ -4,7 +4,7 @@ class RoomPolicy < ApplicationPolicy
   end
 
   def show?
-    admin_or_owner?
+    user.present?
   end
 
   def edit?
@@ -12,7 +12,7 @@ class RoomPolicy < ApplicationPolicy
   end
 
   def new?
-    organization.in?(user.organizations)
+    admin_or_owner?
   end
 
   def update?
@@ -31,11 +31,19 @@ class RoomPolicy < ApplicationPolicy
         scope.where(organization.in?(user.organizations))
       end
     end
+
+    private
+
+    attr_reader :user, :scope
   end
 
   private
 
   def admin_or_owner?
-    user.admin? || @record.organization.user == user
+    if @record.organization.present?
+      user.admin? || @record.organization.user == user
+    else
+      user.admin?
+    end
   end
 end

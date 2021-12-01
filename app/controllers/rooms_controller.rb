@@ -1,6 +1,6 @@
 class RoomsController < AuthorizedController
   before_action :set_room, only: %i[show edit update destroy]
-
+  
   def index
     authorize Room
     respond_to do |format|
@@ -13,10 +13,16 @@ class RoomsController < AuthorizedController
 
   def show
     authorize @room
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @room
+      end
+    end
   end
 
   def new
-    @room = Room.new
+    @room = Room.new(organization_id: params[:organization_id])
     authorize @room
   end
 
@@ -25,8 +31,8 @@ class RoomsController < AuthorizedController
   end
 
   def create
-    authorize Room
     @room = Room.new(room_params)
+    authorize @room
 
     respond_to do |format|
       if @room.save

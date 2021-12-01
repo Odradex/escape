@@ -1,17 +1,19 @@
 #myCarousel.carousel.slide{"data-ride" => "carousel"}
   %ol.carousel-indicators
-    %li{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+    - if !user_signed_in?
+      %li{"data-slide-to" => "0", "data-target" => "#myCarousel"}
     %li{"data-slide-to" => "1", "data-target" => "#myCarousel"}
     %li.active{"data-slide-to" => "2", "data-target" => "#myCarousel"}
   .carousel-inner
-    .carousel-item
-      = image_tag "home-1.jpg", class: "first-slide w-100"
-      .container
-        .carousel-caption
-          %h1 The best place for a party.
-          %p Comfortable furniture and stylish interiors will allow you to celebrate any event with fun and grace.
-          %p
-            = button_to "Sign up now", new_user_registration_path, class: "btn btn-lg btn-primary", method: :get
+    - if !user_signed_in?
+      .carousel-item
+        = image_tag "home-1.jpg", class: "first-slide w-100"
+        .container
+          .carousel-caption
+            %h1 The best place for a party.
+            %p Comfortable furniture and stylish interiors will allow you to celebrate any event with fun and grace.
+            %p
+              = button_to "Sign up now", new_user_registration_path, class: "btn btn-lg btn-primary", method: :get
     .carousel-item
       = image_tag "home-2.jpeg", class: "second-slide w-100"
       .container
@@ -35,7 +37,22 @@
     %span.carousel-control-next-icon{"aria-hidden" => "true"}
     %span.sr-only Next
 .container.marketing.mt-4
-  %hr.featurette-divider/
+  %hr.featurette-divider
+  = button_to "Reserve room", new_reservation_path, class: "btn btn-lg btn-primary w-100", method: :get
+  %hr.featurette-divider
+  - if @reservations.any?
+    %span.font-weight-bold.display-3.text-primary
+      Your reservations
+    - @reservations.each do |reservation|
+      .col.card.border-primary.m-3
+        .card-body
+          %h5.card-title="Reservation at #{reservation.event.organization.name}"
+          %p.card-subtitle.text-muted="Start time: #{reservation.event.start_date.strftime("%d/%m/%Y %H:%M")}"
+          %p.card-subtitle.text-muted="Room: #{reservation.room.number}"
+          %p.card-subtitle.text-muted="Services: #{reservation.services.map(&:name).join(', ')}"
+          %p.card-subtitle.text-muted="Price: $#{reservation.price}"
+
+    %hr.featurette-divider
   .row.featurette
     .col-md-7
       %h2.featurette-heading
