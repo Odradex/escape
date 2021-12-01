@@ -23,6 +23,10 @@ class ServicePolicy < ApplicationPolicy
     true
   end
 
+  def total_price?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.all

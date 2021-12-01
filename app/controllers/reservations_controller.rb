@@ -1,4 +1,5 @@
 class ReservationsController < AuthorizedController
+  skip_before_action :verify_authenticity_token
   before_action :set_reservation, only: %i[show edit update destroy]
 
   def index
@@ -17,6 +18,7 @@ class ReservationsController < AuthorizedController
 
   def new
     @reservation = Reservation.new
+    gon.calendar_events_path = calendar_events_path
     authorize @reservation
   end
 
@@ -25,18 +27,13 @@ class ReservationsController < AuthorizedController
   end
 
   def create
-    @reservation = Reservation.new(reservation_params)
+    @reservation = Reservation.create(
+      user_id: current_user.id,
+      room_id: params[:room_id],
+      event_id: Event.last.id,
+      service_ids: params[:service_ids]
+    )
     authorize @reservation
-
-    respond_to do |format|
-      if @reservation.save
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
-        format.json { render :show, status: :created, location: @reservation }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   def update
@@ -59,6 +56,11 @@ class ReservationsController < AuthorizedController
       format.html { redirect_to reservations_url, notice: 'Reservation was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def add_event_to_reservation
+    authorize @reservation
+    @reservation.update(event_id: params[:event_id])
   end
 
   private

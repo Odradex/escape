@@ -36,7 +36,6 @@ scheduler.form_blocks["service_selector"]={
       return service_select.outerHTML;
   },
   set_value:function(node,value,ev,config){
-      alert(value);
       $("#services-select").selectpicker('val', value);
   },
   get_value:function(node,ev,config){

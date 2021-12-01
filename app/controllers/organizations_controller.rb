@@ -12,6 +12,11 @@ class OrganizationsController < AuthorizedController
     end
   end
 
+  def rooms
+    authorize Organization
+    render json: Organization.find(params[:id]).rooms
+  end
+
   def show
     gon.calendar_events_path = calendar_events_path(organization_id: @organization.id)
     authorize @organization

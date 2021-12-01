@@ -61,6 +61,11 @@ class ServicesController < AuthorizedController
     end
   end
 
+  def total_price
+    render json: Service.where(id: params[:service_ids]).sum(:price)
+    authorize Service
+  end
+
   private
 
   def set_service

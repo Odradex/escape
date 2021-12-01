@@ -36,6 +36,10 @@ class ReservationPolicy
     true
   end
 
+  def add_event_to_reservation?
+    
+  end
+
   class Scope
     def initialize(user, scope)
       @user = user

@@ -7,12 +7,14 @@
 %h2 Make a reservation
 #organization-section
   %hr
-  %h4 Organization
+  %h4 Organization & room
   %p Please select the organization you are reserving for: 
   = select(:organization, :organization_id, Organization.all.pluck(:name, :id), {}, {class: 'selectpicker w-50'})
+  %p.mt-2 Please select the room you are reserving:
+  = select(:room, :room_id, {}, {}, {class: 'selectpicker w-50'})
 #date-section
   %hr
-  %h4 Date and time
+  %h4 Date
   %p Choose a date for the reservation
   %input.datepicker.form-control.input-lg.input-block.w-50#date
 #time-section
@@ -20,6 +22,25 @@
   %h4 Time
   %p Choose a time for the reservation
   #scheduler_here.dhx_cal_container{style: "width:60%; height:800px;"}
-  .dhx_cal_data
+    .dhx_cal_header
+    .dhx_cal_data
   = Gon::Base.render_data
   = javascript_include_tag 'calendar_customer_form', 'data-turbolinks-track': true
+#services-section
+  %hr
+  %h4 Services
+  %p Choose the services you are reserving:
+  %select.selectpicker.w-50#services-select{'data-container': 'body', multiple: true, 'data-selected-text-format': 'count > 3', 'data-live-search': 'true'}
+    - services = Service.all
+    - services.categories.keys.each do |category|
+      %optgroup{label: category}
+        - services.where(category: category).each do |service|
+          %option{value: service.id, 'data-subtext': "$#{service.price}"}= service.name
+#confirmation-section.pb-5
+  %hr
+  %h4 Confirmation
+  %p Please confirm your reservation:
+  %p Your subtotal is:
+  %p#services-price Services: $0
+  %p#rental-price Room rental: $0
+  = button_tag 'Confirm reservation', class: 'btn btn-primary w-50', id: 'submit-button'

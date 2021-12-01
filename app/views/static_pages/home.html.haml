@@ -1,4 +1,71 @@
-%h2 ESCAPE | Home page
-%p This page is in development.
-
-= link_to 'Make Reservation', new_reservation_path
+#myCarousel.carousel.slide{"data-ride" => "carousel"}
+  %ol.carousel-indicators
+    %li{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+    %li{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+    %li.active{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+  .carousel-inner
+    .carousel-item
+      = image_tag "home-1.jpg", class: "first-slide w-100"
+      .container
+        .carousel-caption
+          %h1 The best place for a party.
+          %p Comfortable furniture and stylish interiors will allow you to celebrate any event with fun and grace.
+          %p
+            = button_to "Sign up now", new_user_registration_path, class: "btn btn-lg btn-primary", method: :get
+    .carousel-item
+      = image_tag "home-2.jpeg", class: "second-slide w-100"
+      .container
+        .carousel-caption
+          %h1 The best equipment for your needs.
+          %p Next-generation consoles and 4k screens provide unrivaled comfort and picture quality.
+          %p
+            %a.btn.btn-lg.btn-primary{href: "#", role: "button"} Learn more
+    .carousel-item.active
+      = image_tag "home-3.jpg", class: "third-slide w-100"
+      .container
+        .carousel-caption
+          %h1 Right next to you.
+          %p Choose from a variety of locations.
+          %p
+            %a.btn.btn-lg.btn-primary{href: "#", role: "button"} Browse our locations
+  %a.carousel-control-prev{"data-slide" => "prev", href: "#myCarousel", role: "button"}
+    %span.carousel-control-prev-icon{"aria-hidden" => "true"}
+    %span.sr-only Previous
+  %a.carousel-control-next{"data-slide" => "next", href: "#myCarousel", role: "button"}
+    %span.carousel-control-next-icon{"aria-hidden" => "true"}
+    %span.sr-only Next
+.container.marketing.mt-4
+  %hr.featurette-divider/
+  .row.featurette
+    .col-md-7
+      %h2.featurette-heading
+        Spacious rooms.
+        %span.text-muted Up to 12 people.
+      %p.lead A very comfortable place for gatherings with karaoke, board games, watching sports broadcasts or a movie. Order food delivery, sit back and enjoy live chat with your friends.
+    .col-md-5
+      = image_tag "home-feature-1.jpg", class: "featurette-image img-fluid mx-auto"
+  %hr.featurette-divider
+  .row.featurette
+    .col-md-7.order-md-2
+      %h2.featurette-heading
+        Services.
+      %p.lead Customize your reservation using a convenient service configurator.
+    .col-md-5.order-md-1
+      = image_tag "home-feature-2.jpg", class: "featurette-image img-fluid mx-auto"
+  %hr.featurette-divider
+  .row.featurette
+    .col-md-7
+      %h2.featurette-heading
+        Broadcast of sports matches.
+      %p.lead Sports bars are a thing of the past - We have everything to comfortably watch your favorite game. It is much more enjoyable to watch the Champions League with friends and comfort, knowing that no one will disturb you.
+    .col-md-5
+      = image_tag "home-feature-3.jpg", class: "featurette-image img-fluid mx-auto"
+  %hr.featurette-divider
+%footer.container
+  %p.float-right
+    %a{href: "#"} Back to top
+  %p
+    © 2017-2018 Company, Inc. ·
+    %a{href: "#"} Privacy
+    ·
+    %a{href: "#"} Terms

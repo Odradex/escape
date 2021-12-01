@@ -3,10 +3,8 @@ class CalendarEventsController < ApplicationController
   before_action :set_parameters
 
   def index
-    logger.info "INDEXING EVENTS"
     current_organization_id = params[:organization_id]
     gon.organization_id = params['id']
-    gon.use_mode = current_user.customer? ? 'customer' : 'manager'
     events = Event.where(organization_id: current_organization_id).eager_load(reservation: :services)
     events = events.map do |event|
       {
@@ -26,12 +24,11 @@ class CalendarEventsController < ApplicationController
   end
 
   def create
-    logger.info "CREATING EVENT FOR #{@organization_id}"
     event = Event.create start_date: @start_date, end_date: @end_date,
-                         text: @text, rec_type: @rec_type,
+                         text: "Reservation", rec_type: @rec_type,
                          event_length: @event_length, event_pid: @event_pid, organization_id: @organization_id
     @reservation = Reservation.create user_id: @user_id, room_id: @room_id, event: event, service_ids: @services
-    event.reservation = @reservation
+    event.update(reservation: @reservation) if @reservation.save
     event.save!
     @tid = event.id
     @mode = 'deleted' if @rec_type == 'none'
