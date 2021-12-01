@@ -1,0 +1,13 @@
+%p
+  %strong User:
+  = @reservation.user.name
+%p
+  %strong Room:
+  = "#{@reservation.room.organization.name} | #{@reservation.room.number}"
+%p
+  %strong Time:
+  = "#{@reservation.start_time.strftime('%H:%M')}-#{@reservation.end_time.strftime('%H:%M')}"
+
+= link_to 'Edit', edit_reservation_path(@reservation)
+|
+= link_to 'Back', room_path(@reservation.room)

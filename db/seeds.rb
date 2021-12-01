@@ -36,3 +36,14 @@ User.last.update(role: 2)
     room.save!
   end
 end
+
+5.times do
+  Service.create(
+    name: Faker::Food.dish,
+    price: rand(5..40),
+    category: "Food"
+  )
+end
+
+Service.create(name: 'PS4 Pro', price: 4, category: 'Consoles')
+Service.create(name: 'Xbox One X', price: 4, category: 'Consoles')

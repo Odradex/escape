@@ -12,3 +12,10 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
+Rails.application.config.assets.precompile += %w( dhtmlxscheduler.css )
+Rails.application.config.assets.precompile += %w( dhtmlxscheduler_material.css )
+Rails.application.config.assets.precompile += %w( dhtmlxscheduler.js )
+Rails.application.config.assets.precompile += %w( ext/dhtmlxscheduler_recurring.js )
+Rails.application.config.assets.precompile += %w( ext/dhtmlxscheduler_limit.js )
+Rails.application.config.assets.precompile += %w( calendar.js )
+Rails.application.config.assets.precompile += %w( calendar_customer_form.js )

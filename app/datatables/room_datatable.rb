@@ -10,7 +10,7 @@ class RoomDatatable < AjaxDatatablesRails::ActiveRecord
 
   def view_columns
     @view_columns ||= {
-      organization: { source: 'Room.organization_id', cond: :like },
+      organization: { source: 'Organization.name', cond: :like },
       number: { source: 'Room.number', cond: :like },
       size: { source: 'Room.size', cond: :like },
       capacity: { source: 'Room.capacity', cond: :like },
@@ -35,6 +35,6 @@ class RoomDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    Room.all
+    Room.eager_load(:organization)
   end
 end

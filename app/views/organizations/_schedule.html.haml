@@ -1,0 +1,30 @@
+= stylesheet_link_tag 'application', media:'all','data-turbolinks-track': true
+= stylesheet_link_tag 'dhtmlxscheduler_material', media:'all','data-turbolinks-track': true
+= javascript_include_tag 'dhtmlxscheduler', 'data-turbolinks-track': true
+= javascript_include_tag 'ext/dhtmlxscheduler_limit', 'data-turbolinks-track': true
+= javascript_include_tag 'ext/dhtmlxscheduler_recurring', 'data-turbolinks-track': true
+.dhx_cal_ltext#user_select
+  = select(:user, :user_id, User.pluck(:name, :id), {}, {class: 'selectpicker', 'data-live-search': 'true', 'data-container': 'body'})
+.dhx_cal_ltext#room_select
+  = select(:room, :room_id, @organization.rooms.pluck(:number, :id), {}, {class: 'selectpicker', 'data-container': 'body'})
+.dhx_cal_ltext#service_select
+  %select.selectpicker#services-select{'data-container': 'body', multiple: true, 'data-selected-text-format': 'count > 3', 'data-live-search': 'true'}
+    - services = Service.all
+    - services.categories.keys.each do |category|
+      %optgroup{label: category}
+        - services.where(category: category).each do |service|
+          %option{value: service.id, 'data-subtext': "$#{service.price}/hr."}= service.name
+
+#scheduler_here.dhx_cal_container{style: "width:100%; height:800px;"}
+  .dhx_cal_navline
+    .dhx_cal_prev_button
+    .dhx_cal_next_button  
+    .dhx_cal_today_button
+    .dhx_cal_date
+    .dhx_cal_tab{name: "day_tab", style: "right:204px;"}
+    .dhx_cal_tab{name: "week_tab", style: "right:140px;"}
+    .dhx_cal_tab{name: "month_tab", style: "right:76px;"}
+  .dhx_cal_header
+  .dhx_cal_data
+= Gon::Base.render_data
+= javascript_include_tag 'calendar', 'data-turbolinks-track': true

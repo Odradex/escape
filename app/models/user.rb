@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :organizations, dependent: :restrict_with_error
+  has_many :reservations, dependent: :restrict_with_error
 
   mount_uploader :avatar, AvatarUploader
   validates :name, presence: true, on: :create

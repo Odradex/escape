@@ -9,15 +9,15 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    false unless admin?
   end
 
   def show?
-    false
+    false unless admin?
   end
 
   def create?
-    false
+    false unless admin?
   end
 
   def new?
@@ -25,7 +25,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    false unless admin?
   end
 
   def edit?
@@ -33,8 +33,10 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    false unless admin?
   end
+
+  delegate :admin?, to: :user
 
   class Scope
     def initialize(user, scope)

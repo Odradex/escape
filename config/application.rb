@@ -10,5 +10,6 @@ module Escape
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
     config.default_locale = :ru
+    config.assets.paths << Rails.root.join('node_modules')
   end
 end

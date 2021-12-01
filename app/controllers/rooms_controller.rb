@@ -1,9 +1,7 @@
-class RoomsController < ApplicationController
+class RoomsController < AuthorizedController
   before_action :set_room, only: %i[show edit update destroy]
-  after_action :verify_authorized
 
   def index
-    @rooms = Room.all
     authorize Room
     respond_to do |format|
       format.html
@@ -14,21 +12,27 @@ class RoomsController < ApplicationController
   end
 
   def show
-    authorize Room
+    authorize @room
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @room
+      end
+    end
   end
 
   def new
-    authorize Room
-    @room = Room.new
+    @room = Room.new(organization_id: params[:organization_id])
+    authorize @room
   end
 
   def edit
-    authorize Room
+    authorize @room
   end
 
   def create
-    authorize Room
     @room = Room.new(room_params)
+    authorize @room
 
     respond_to do |format|
       if @room.save
@@ -42,7 +46,7 @@ class RoomsController < ApplicationController
   end
 
   def update
-    authorize Room
+    authorize @room
     respond_to do |format|
       if @room.update(room_params)
         format.html { redirect_to @room, notice: 'Room was successfully updated.' }
@@ -55,7 +59,7 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    authorize Room
+    authorize @room
     @room.destroy
     respond_to do |format|
       format.html { redirect_to rooms_url, notice: 'Room was successfully destroyed.' }
