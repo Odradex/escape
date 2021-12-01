@@ -23,20 +23,20 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'ajax-datatables-rails'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 gem 'bootstrap-sass'
 gem 'carrierwave', '~> 2.0'
 gem 'devise'
 gem 'draper'
 gem 'faker'
+gem 'gon'
 gem 'haml'
 gem 'jquery-datatables'
 gem 'listen'
 gem 'mini_magick'
+gem 'momentjs-rails', '>= 2.9.0'
 gem 'pundit'
 gem 'rubocop-rails', require: false
-gem 'momentjs-rails', '>= 2.9.0'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
-gem 'gon'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

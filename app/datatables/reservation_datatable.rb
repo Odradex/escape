@@ -31,5 +31,4 @@ class ReservationDatatable < AjaxDatatablesRails::ActiveRecord
   def get_raw_records
     Reservation.where(room_id: params[:room_id]).eager_load(:user)
   end
-
 end

@@ -1,6 +1,6 @@
 class RoomsController < AuthorizedController
   before_action :set_room, only: %i[show edit update destroy]
-  
+
   def index
     authorize Room
     respond_to do |format|
