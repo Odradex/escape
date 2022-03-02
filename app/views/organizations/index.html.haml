@@ -1,14 +1,14 @@
 =javascript_include_tag 'organizations_datatable'
-%h1.mb-3 Organizations
+%h1.mb-3 Организации
 %table.table.table-hover#organizations-datatable{"data-source" => "#{organizations_path(format: :json)}"}
   %thead
     %tr
-      %th Name
-      %th Owner
-      %th Adress
-      %th Opening time
-      %th Closing time
-      %th Options
+      %th Название
+      %th Владелец
+      %th Адрес
+      %th Время открытия
+      %th Время закрытия
+      %th Опции
   %tbody
 %br/
-= link_to 'New Organization', new_organization_path if current_user.admin?
+= link_to 'Создать новую организацию', new_organization_path if current_user.admin?

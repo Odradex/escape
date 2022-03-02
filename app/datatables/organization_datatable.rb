@@ -27,9 +27,9 @@ class OrganizationDatatable < AjaxDatatablesRails::ActiveRecord
         adress: record.adress,
         opening_time: record.opening_time.strftime('%H:%M'),
         closing_time: record.closing_time.strftime('%H:%M'),
-        options: link_to('Show', organization_path(record))
+        options: link_to('Показать', organization_path(record))
           .concat(' ')
-          .concat(link_to('Edit', edit_organization_path(record)))
+          .concat(link_to('Изменить', edit_organization_path(record)))
       }
     end
   end

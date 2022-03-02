@@ -23,7 +23,7 @@ class ReservationDatatable < AjaxDatatablesRails::ActiveRecord
         user: record.user.name,
         start_time: record.start_time.strftime('%H:%M'),
         end_time: record.end_time.strftime('%H:%M'),
-        options: link_to('Edit', edit_reservation_path(record))
+        options: link_to('Изменить', edit_reservation_path(record))
       }
     end
   end

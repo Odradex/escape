@@ -10,26 +10,26 @@
         = image_tag "home-1.jpg", class: "first-slide w-100"
         .container
           .carousel-caption
-            %h1 The best place for a party.
-            %p Comfortable furniture and stylish interiors will allow you to celebrate any event with fun and grace.
+            %h1 Лучшее местро для вечеринки
+            %p Удобная мебель и стильные интерьеры позволят вам отметить любое событие со стилем и весельем.
             %p
-              = button_to "Sign up now", new_user_registration_path, class: "btn btn-lg btn-primary", method: :get
+              = button_to "Зарегистрироваться", new_user_registration_path, class: "btn btn-lg btn-primary", method: :get
     .carousel-item
       = image_tag "home-2.jpeg", class: "second-slide w-100"
       .container
         .carousel-caption
-          %h1 The best equipment for your needs.
-          %p Next-generation consoles and 4k screens provide unrivaled comfort and picture quality.
+          %h1 Современное оборудование - только для вас.
+          %p Консоли следующего поколения и 4K экраны для вашей вечеринки.
           %p
-            %a.btn.btn-lg.btn-primary{href: "#", role: "button"} Learn more
+            %a.btn.btn-lg.btn-primary{href: "#", role: "button"} Узнать больше
     .carousel-item.active
       = image_tag "home-3.jpg", class: "third-slide w-100"
       .container
         .carousel-caption
-          %h1 Right next to you.
-          %p Choose from a variety of locations.
+          %h1 12 локаций в минске.
+          %p Выберите удобное расположение.
           %p
-            %a.btn.btn-lg.btn-primary{href: "#", role: "button"} Browse our locations
+            %a.btn.btn-lg.btn-primary{href: "#", role: "button"} Перейти к карте
   %a.carousel-control-prev{"data-slide" => "prev", href: "#myCarousel", role: "button"}
     %span.carousel-control-prev-icon{"aria-hidden" => "true"}
     %span.sr-only Previous
@@ -38,51 +38,51 @@
     %span.sr-only Next
 .container.marketing.mt-4
   %hr.featurette-divider
-  = button_to "Reserve room", new_reservation_path, class: "btn btn-lg btn-primary w-100", method: :get
+  = button_to "Новая резервация", new_reservation_path, class: "btn btn-lg btn-primary w-100", method: :get
   %hr.featurette-divider
-  - if @reservations.any?
+  - if @reservations&.any?
     %span.font-weight-bold.display-3.text-primary
-      Your reservations
+      Ваши резервации
     - @reservations.each do |reservation|
       .col.card.border-primary.m-3
         .card-body
-          %h5.card-title="Reservation at #{reservation.event.organization.name}"
-          %p.card-subtitle.text-muted="Start time: #{reservation.event.start_date.strftime("%d/%m/%Y %H:%M")}"
-          %p.card-subtitle.text-muted="Room: #{reservation.room.number}"
-          %p.card-subtitle.text-muted="Services: #{reservation.services.map(&:name).join(', ')}"
-          %p.card-subtitle.text-muted="Price: $#{reservation.price}"
+          %h5.card-title="Резервация в #{reservation.event.organization.name}"
+          %p.card-subtitle.text-muted="Дата и время: #{reservation.event.start_date.strftime("%d/%m/%Y %H:%M")}"
+          %p.card-subtitle.text-muted="Комната: #{reservation.room.number}"
+          %p.card-subtitle.text-muted="Услуги: #{reservation.services.map(&:name).join(', ')}"
+          %p.card-subtitle.text-muted="Цена: #{reservation.price} BYN"
 
     %hr.featurette-divider
   .row.featurette
     .col-md-7
       %h2.featurette-heading
-        Spacious rooms.
-        %span.text-muted Up to 12 people.
-      %p.lead A very comfortable place for gatherings with karaoke, board games, watching sports broadcasts or a movie. Order food delivery, sit back and enjoy live chat with your friends.
+        Просторные комнаты
+        %span.text-muted До 12 гостей.
+      %p.lead Удобное место для посиделок с караоке, настольными играми, просмотра спортивных передач или фильма. Закажите доставку еды, расслабьтесь и наслаждайтесь живым общением с друзьями.
     .col-md-5
       = image_tag "home-feature-1.jpg", class: "featurette-image img-fluid mx-auto"
   %hr.featurette-divider
   .row.featurette
     .col-md-7.order-md-2
       %h2.featurette-heading
-        Services.
-      %p.lead Customize your reservation using a convenient service configurator.
+        Сервисы.
+      %p.lead Добавьте все необходимое с помощью удобного конфигуратора услуг.
     .col-md-5.order-md-1
       = image_tag "home-feature-2.jpg", class: "featurette-image img-fluid mx-auto"
   %hr.featurette-divider
   .row.featurette
     .col-md-7
       %h2.featurette-heading
-        Broadcast of sports matches.
-      %p.lead Sports bars are a thing of the past - We have everything to comfortably watch your favorite game. It is much more enjoyable to watch the Champions League with friends and comfort, knowing that no one will disturb you.
+        Спортивные трансляции.
+      %p.lead Спорт-бары ушли в прошлое - у нас есть все, чтобы с комфортом смотреть любимую игру. Гораздо приятнее смотреть Лигу чемпионов в компании друзей и с комфортом, зная, что никто не побеспокоит.
     .col-md-5
       = image_tag "home-feature-3.jpg", class: "featurette-image img-fluid mx-auto"
   %hr.featurette-divider
 %footer.container
   %p.float-right
-    %a{href: "#"} Back to top
+    %a{href: "#"} Наверх
   %p
     © 2017-2018 Company, Inc. ·
-    %a{href: "#"} Privacy
+    %a{href: "#"} Защита персональных данных
     ·
-    %a{href: "#"} Terms
+    %a{href: "#"} Условия использования

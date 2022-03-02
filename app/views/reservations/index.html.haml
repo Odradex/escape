@@ -1,12 +1,12 @@
-%h1 Reservations
+%h1 Резервации
 %table#dttb-reservations.responsive.nowrap.table.table-hover{"data-sort" => "true", "data-source" => "#{url_for(format: :json)}"}
   %thead
     %tr
-      %th{"data-data" => "user"} User
-      %th{"data-data" => "room"} Room
-      %th{"data-data" => "date"} Date
-      %th{"data-data" => "start_time"} Start time
-      %th{"data-data" => "end_time"} End time
+      %th{"data-data" => "user"} Пользователь
+      %th{"data-data" => "room"} Комната
+      %th{"data-data" => "date"} Дата
+      %th{"data-data" => "start_time"} Начало
+      %th{"data-data" => "end_time"} Конец
       %th.skip-export{"data-class-name" => "all", "data-data" => "url", "data-orderable" => "false", "data-searchable" => "false", :width => "100px"}
 %br/
-= link_to 'New Reservation', new_reservation_path
+= link_to 'Новая резервация', new_reservation_path

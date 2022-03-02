@@ -11,5 +11,7 @@ module Escape
     config.load_defaults 6.1
     config.default_locale = :ru
     config.assets.paths << Rails.root.join('node_modules')
+
+    config.i18n.default_locale = :ru
   end
 end

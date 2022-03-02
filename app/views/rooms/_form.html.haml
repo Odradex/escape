@@ -2,31 +2,30 @@
   - if room.errors.any?
     #error_explanation
       %h2
-        = pluralize(room.errors.count, "error")
-        prohibited this room from being saved:
+        Возникли ошибки
       %ul
         - room.errors.each do |error|
           %li= error.full_message
-  = form.label :organization, class: 'form-label'
+  = form.label :organization, 'Организация', class: 'form-label'
   .input-group.mb-3
     = form.select :organization_id, Organization.pluck(:name, :id), {}, {class: 'custom-select'}
-  = form.label :number, class: 'form-label'
+  = form.label :number, 'Номер', class: 'form-label'
   .input-group.mb-3
     = form.text_field :number, class: 'form-control'
-  = form.label :size, class: 'form-label'
+  = form.label :size, 'Размер', class: 'form-label'
   .input-group.mb-3
     = form.text_field :size, class: 'form-control'
     .input-group-append
       %span.input-group-text m²
-  = form.label :capacity, class: 'form-label'
+  = form.label :capacity, 'Вместимость', class: 'form-label'
   .input-group.mb-3
     = form.text_field :capacity, class: 'form-control'
     .input-group-append
-      %span.input-group-text vizitors
-  = form.label :hourly_payment, class: 'form-label'
+      %span.input-group-text человек
+  = form.label :hourly_payment, 'Тариф', class: 'form-label'
   .input-group.mb-3
     = form.text_field :hourly_payment, class: 'form-control'
     .input-group-append
-      %span.input-group-text $
+      %span.input-group-text BYN
   .actions
-    = form.submit 'Submit', class: 'btn btn-primary mb-3'
+    = form.submit 'Создать комнату', class: 'btn btn-primary mb-3'

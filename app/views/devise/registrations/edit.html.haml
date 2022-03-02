@@ -1,6 +1,6 @@
 %h2.mb-4
   = current_user.name 
-  | Account settings
+  | Настройки профиля
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'edit-user', multipart: true }) do |f|
   = render "devise/shared/error_messages", resource: resource
   .row
@@ -10,7 +10,7 @@
           = image_tag current_user.avatar.url, class: 'rounded-circle text-center'
     .col-md-8
       .form-group
-        = f.label :name, class: 'form-label'
+        = f.label 'Имя', class: 'form-label'
         = f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control'
       
       .form-group
@@ -25,26 +25,25 @@
         
       = f.hidden_field :avatar_cache
   .form-group
-    = f.label :password, class: 'form-label'
-    %i (leave blank if you don't want to change it)
+    = f.label :password, 'Новый пароль', class: 'form-label'
+    %i (Если не нужно менять пароль, оставьте поле пустым)
     = f.password_field :password, autocomplete: "new-password", class: 'form-control'
     - if @minimum_password_length
       %em
-        = @minimum_password_length
-        characters minimum
+        Минимум #{@minimum_password_length} символов
   .form-group
-    = f.label :password_confirmation
+    = f.label :password_confirmation, 'Подтвердите пароль'
     = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control'
     %hr/
   .form-field
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
+    = f.label :current_password, 'Текущий пароль'
+    %i (Чтобы применить изменения, введите текущий пароль)
     = f.password_field :current_password, autocomplete: "current-password", class: 'form-control'
   .actions.mt-3
-    = f.submit "Update", class: "btn btn-primary"
-    = link_to "Back", :back
+    = f.submit "Сохранить", class: "btn btn-primary"
+    = link_to "Назад", :back
   %hr/
 .form-group
-  %label.d-block.text-danger Delete Account
-  %p.text-muted.font-size-sm Once you delete your account, there is no going back. Please be certain.
-  = button_to 'Cancel account', registration_path(current_user), class: 'btn btn-danger', data: { confirm: "Are you sure?", toggle: 'modal', target: '#passwordModal'}, method: :delete
+  %label.d-block.text-danger Удалить аккаунт
+  %p.text-muted.font-size-sm Вы можете удалить свой аккаунт и все данные, которые в нем сохранены. Это необратимо.
+  = button_to 'Удалить аккаунт', registration_path(current_user), class: 'btn btn-danger', data: { confirm: "Вы уверены?", toggle: 'modal', target: '#passwordModal'}, method: :delete

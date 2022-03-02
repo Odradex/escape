@@ -1,13 +1,13 @@
 %p
-  %strong User:
+  %strong Пользователь:
   = @reservation.user.name
 %p
-  %strong Room:
+  %strong Комната:
   = "#{@reservation.room.organization.name} | #{@reservation.room.number}"
 %p
-  %strong Time:
+  %strong Время:
   = "#{@reservation.start_time.strftime('%H:%M')}-#{@reservation.end_time.strftime('%H:%M')}"
 
-= link_to 'Edit', edit_reservation_path(@reservation)
+= link_to 'Изменить', edit_reservation_path(@reservation)
 |
-= link_to 'Back', room_path(@reservation.room)
+= link_to 'Назад', room_path(@reservation.room)

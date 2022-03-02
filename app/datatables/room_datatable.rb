@@ -27,9 +27,9 @@ class RoomDatatable < AjaxDatatablesRails::ActiveRecord
         size: record.size,
         capacity: record.capacity,
         hourly_payment: record.hourly_payment,
-        options: link_to('Show', room_path(record))
+        options: link_to('Показать', room_path(record))
           .concat(' ')
-          .concat(link_to('Edit', edit_room_path(record)))
+          .concat(link_to('Изменить', edit_room_path(record)))
       }
     end
   end

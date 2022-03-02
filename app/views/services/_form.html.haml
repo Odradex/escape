@@ -2,21 +2,20 @@
   - if service.errors.any?
     #error_explanation
       %h2
-        = pluralize(service.errors.count, "error")
-        prohibited this service from being saved:
+        Возникли ошибки
       %ul
         - service.errors.each do |error|
           %li= error.full_message
-  = form.label :category
+  = form.label :category, 'Категория'
   .input-group.mb-3
     = form.select :category_id, Service.categories, {}, {class: 'selectpicker', data: {liveSearch: 'true'}}
-  = form.label :name
+  = form.label :name, 'Название'
   .input-group.mb-3
     = form.text_field :name, class: "form-control"
-  = form.label :price
+  = form.label :price, 'Стоимость'
   .input-group.mb-3
     = form.text_field :price, class: 'form-control'
     .input-group-append
-      %span.input-group-text $
+      %span.input-group-text BYN
   .actions
-    = form.submit 'Submit', class: 'btn btn-primary'
+    = form.submit 'Создать', class: 'btn btn-primary'
