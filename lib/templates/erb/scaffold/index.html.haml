@@ -1,0 +1,11 @@
+%h1= plural_table_name.titleize
+%table#dttb-.responsive.nowrap.table.table-hover
+= plural_table_name
+" data-sort="true" data-source="%= url_for(format: :json)%&gt;"&gt;
+%thead
+  %tr
+    - attributes.reject(:password_digest?).each do |attribute|
+      %th{"data-data" => ""}
+      = attribute.name
+      "&gt;#{attribute.human_name}
+  %th.skip-export{"data-class-name" => "all", "data-data" => "url", "data-orderable" => "false", "data-searchable" => "false", :width => "100px"}

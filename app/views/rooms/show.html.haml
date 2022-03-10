@@ -1,0 +1,52 @@
+%p#notice= notice
+=javascript_include_tag 'reservations_datatable'
+= link_to '< Back', rooms_path
+%h2.mb-3.mt-2="Viewing room №#{@room.number} in #{@room.organization.name} organization"
+.row
+  .col-3
+    #v-pills-tab.nav.flex-column.nav-pills{"aria-orientation": "vertical", role: "tablist"}
+      %a#v-pills-info-tab.nav-link.active{"aria-controls": "v-pills-info", "aria-selected": "true", "data-toggle": "pill", href: "#v-pills-info", role: "tab"} Info
+      %a#v-pills-notifications-tab.nav-link{"aria-controls": "v-pills-notifications", "aria-selected": "false", "data-toggle": "pill", href: "#v-pills-notifications", role: "tab"} Notifications
+      %a#v-pills-reservations-tab.nav-link{"aria-controls": "v-pills-reservations", "aria-selected": "false", "data-toggle": "pill", href: "#v-pills-reservations", role: "tab"} Reservations
+      %a#v-pills-settings-tab.nav-link{"aria-controls": "v-pills-settings", "aria-selected": "false", "data-toggle": "pill", href: "#v-pills-settings", role: "tab"} Settings
+  .col-9.border.rounded.bg-light.p-3
+    #v-pills-tabContent.tab-content
+      #v-pills-info.tab-pane.fade.show.active{"aria-labelledby": "v-pills-info-tab", role: "tabpanel"}
+        .row
+          .col-4
+            %p
+              %strong Organization:
+              = link_to(@room.organization.name, organization_path(@room.organization))
+            %p
+              %strong Size:
+              = @room.size
+              m²
+            %p
+              %strong Capacity:
+              = @room.capacity
+              vizitors
+            %p
+              %strong Hourly payment:
+              = @room.hourly_payment
+              $
+            =button_to 'Edit info', edit_room_url(@room), method: 'get', class: 'btn btn-secondary'
+          .col-8.d-flex.justify-content-end
+            .card.bg-dark.text-white.w-75.d-flex.justify-content-end
+              =image_tag 'room.jpeg', class: 'rounded card-img', style: 'filter: brightness(50%)'
+              .card-img-overlay.d-flex.h-100
+                %h2.text-center.w-100.align-self-center="Room #{@room.number}"
+      #v-pills-notifications.tab-pane.fade{"aria-labelledby": "v-pills-notifications-tab", role: "tabpanel"} 
+        function in development
+      #v-pills-reservations.tab-pane.fade{"aria-labelledby": "v-pills-reservations-tab", role: "tabpanel"} 
+        =link_to 'New reservation', new_reservation_url(room_id: @room.id), class: 'btn btn-success', method: 'get'
+        %hr
+        %table#reservations-datatable.table.table-hover.w-100{"data-sort" => "true", "data-source" => "#{reservations_path(format: :json, room_id: @room.id)}"}
+          %thead
+            %tr
+              %th{"data-data" => "user"} User
+              %th{"data-data" => "start_time"} Start time
+              %th{"data-data" => "end_time"} End time
+              %th{"data-data" => "options"} Options
+              
+      #v-pills-settings.tab-pane.fade{"aria-labelledby": "v-pills-settings-tab", role: "tabpanel"} 
+        function in development

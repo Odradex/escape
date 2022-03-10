@@ -40,7 +40,11 @@
   %hr.featurette-divider
   = button_to "Reserve room", new_reservation_path, class: "btn btn-lg btn-primary w-100", method: :get
   %hr.featurette-divider
+<<<<<<< HEAD
   - if @reservations&.any?
+=======
+  - if @reservations.any?
+>>>>>>> 2e284f99e2cf096619dfeed12b1a958f2abde65b
     %span.font-weight-bold.display-3.text-primary
       Your reservations
     - @reservations.each do |reservation|

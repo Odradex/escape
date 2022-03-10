@@ -23,6 +23,10 @@ class OrganizationPolicy < ApplicationPolicy
     new?
   end
 
+  def rooms?
+    true
+  end
+
   class Scope < Scope
     def resolve
       if user.admin?

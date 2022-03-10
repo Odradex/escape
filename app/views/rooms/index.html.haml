@@ -1,0 +1,14 @@
+%h1 Rooms
+=javascript_include_tag 'rooms_datatable'
+%table#rooms-datatable.responsive.nowrap.table.table-hover{"data-source" => "#{rooms_path(format: :json)}"}
+  %thead
+    %tr
+      %th Organization
+      %th Number
+      %th Size
+      %th Capacity
+      %th Hourly payment
+      %th Options
+  %tbody
+%br/
+= link_to 'New Room', new_room_path
