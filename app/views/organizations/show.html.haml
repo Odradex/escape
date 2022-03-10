@@ -1,16 +1,5 @@
-%p#notice= notice
-%p
-  %strong User:
-  = @organization.user.name
-%p
-  %strong Adress:
-  = @organization.adress
-%p
-  %strong Opening time:
-  = @organization.opening_time
-%p
-  %strong Closing time:
-  = @organization.closing_time
-= link_to 'Edit', edit_organization_path(@organization, false)
-|
-= link_to 'Back', organizations_path
+= link_to '< Back', organizations_path
+- if current_user.customer?
+  = render 'customer'
+- else
+  = render 'admin'

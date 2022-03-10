@@ -4,7 +4,7 @@ class OrganizationPolicy < ApplicationPolicy
   end
 
   def show?
-    admin_or_owner?
+    true
   end
 
   def new?

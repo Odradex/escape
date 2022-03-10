@@ -1,0 +1,16 @@
+%h2.mb-3.mt-2.align-center="Viewing organization #{@organization.name}"
+
+%p
+  %strong Owner:
+  = @organization.user.name
+%p
+  %strong Adress:
+  = @organization.adress
+%p
+  %strong Opening time:
+  = @organization.opening_time.strftime('%H:%M')
+%p
+  %strong Closing time:
+  = @organization.closing_time.strftime('%H:%M')
+
+= juvia_comments
