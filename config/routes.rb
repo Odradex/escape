@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get '/organizations/:id/rooms', to: 'organizations#rooms'
   get '/total_service_price', to: 'services#total_price'
   post '/add_event_to_reservation', to: 'reservations#add_event_to_reservation'
+  mount Commontator::Engine => '/commontator'
 end

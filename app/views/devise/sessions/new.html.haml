@@ -3,7 +3,7 @@
   %h1.h3.mt-2.pb-2.font-weight-normal Вход
   = f.label :email, class: 'sr-only'
   = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "form-control field_top"
-  = f.label :password, 'Пароль' class: 'sr-only'
+  = f.label :password, 'Пароль', class: 'sr-only'
   = f.password_field :password, autocomplete: "current-password", placeholder: "Пароль", class: "form-control field_bottom"
   - if devise_mapping.rememberable?
     .form-check

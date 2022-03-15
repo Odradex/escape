@@ -27,8 +27,8 @@
         %span.navbar-toggler-icon
       #navbarCollapse.collapse.navbar-collapse
         %ul.navbar-nav
+          = link_to 'Организации', organizations_path, class: "nav-link"
           - if user_signed_in? && !current_user.customer?
-            = link_to 'Организации', organizations_path, class: "nav-link"
             = link_to 'Комнаты', rooms_path, class: "nav-link"
             = link_to 'Сервисы', services_path, class: "nav-link"
         %ul.navbar-nav.ml-auto
@@ -36,7 +36,7 @@
             %li
               = link_to current_user.name, edit_user_registration_path, class: "nav-link"
             %li.nav-item
-              = link_to 'Выйти', destroy_user_session_path, method: :delete, class: "nav-link"
+              = link_to 'Выйти!', destroy_user_session_path, method: :delete, class: "nav-link"
           - else
             %li.nav-item
               = link_to 'Войти', new_user_session_path, class: "nav-link"

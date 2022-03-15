@@ -38,7 +38,7 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'pundit'
 gem 'rubocop-rails', require: false
 gem 'geocoder'
-gem 'juvia_rails', github: 'theodi/juvia_rails'
+gem 'commontator'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

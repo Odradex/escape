@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :reservations, dependent: :restrict_with_error
 
   mount_uploader :avatar, AvatarUploader
+  acts_as_commontator
   validates :name, presence: true, on: :create
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable

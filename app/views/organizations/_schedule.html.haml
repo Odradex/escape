@@ -3,6 +3,8 @@
 = javascript_include_tag 'dhtmlxscheduler', 'data-turbolinks-track': true
 = javascript_include_tag 'ext/dhtmlxscheduler_limit', 'data-turbolinks-track': true
 = javascript_include_tag 'ext/dhtmlxscheduler_recurring', 'data-turbolinks-track': true
+= javascript_include_tag 'locale/locale_ru.js', 'data-turbolinks-track': true
+
 .dhx_cal_ltext#user_select
   = select(:user, :user_id, User.pluck(:name, :id), {}, {class: 'selectpicker', 'data-live-search': 'true', 'data-container': 'body'})
 .dhx_cal_ltext#room_select

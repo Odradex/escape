@@ -1,6 +1,6 @@
 class OrganizationPolicy < ApplicationPolicy
   def index?
-    !user.customer?
+    user
   end
 
   def show?
@@ -31,8 +31,10 @@ class OrganizationPolicy < ApplicationPolicy
     def resolve
       if user.admin?
         scope.all
-      else
+      elsif user.owner?
         scope.where(user: user)
+      else
+        scope.all
       end
     end
 
