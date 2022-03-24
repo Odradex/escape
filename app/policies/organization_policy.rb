@@ -23,6 +23,10 @@ class OrganizationPolicy < ApplicationPolicy
     new?
   end
 
+  def report?
+    user.admin?
+  end
+
   def rooms?
     true
   end

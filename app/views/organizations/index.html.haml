@@ -1,5 +1,10 @@
 =javascript_include_tag 'organizations_datatable'
 %h1.mb-3 Организации
+// link to report download
+= link_to 'Скачать отчет', report_path, method: 'get', class: 'btn btn-primary mb-3'
+= link_to 'Скачать список организаций', organizations_path(format: 'xlsx'), class: 'btn btn-primary mb-3'
+
+#map.mb-3
 %table.table.table-hover#organizations-datatable{"data-source" => "#{organizations_path(format: :json)}"}
   %thead
     %tr
@@ -12,3 +17,45 @@
   %tbody
 %br/
 = link_to 'Создать новую организацию', new_organization_path if current_user.admin?
+
+= Gon::Base.render_data
+/ Async script executes immediately and must be after any DOM elements used in callback.
+%script{async: "", src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyA4BqaUMBXgeJXj5M38ElAuI4klPxUKec4&callback=initMap&v=weekly"}
+- if current_user.customer?
+  :javascript
+    $('document').ready(function (){
+      $('a').contents('Изменить').hide();
+    });
+:javascript
+  // Initialize and add the map
+  function initMap() {
+    // The location of Uluru
+    const minsk = { lat: 53.9024716, lng: 27.5618225 };
+    // The map, centered at Uluru
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 11,
+      center: minsk,
+    });
+    // for each entry in gon.adresses
+    gon.markers.forEach(function(adress) {
+      contentString = '<h4>' + adress.name + '</h4>' +
+      '<div id="bodyContent">' +
+      "<p>Время работы: " + adress.opening_time + "-" + adress.closing_time + "</p>" +
+      '<p><a href="/reservations/new">' +
+      "Арендовать комнату</a></p>"
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+      });
+      const marker = new google.maps.Marker({
+        position: adress,
+        map: map,
+      });
+      marker.addListener("click", () => {
+        infowindow.open({
+          anchor: marker,
+          map,
+          shouldFocus: false,
+        });
+      });
+    });
+  }

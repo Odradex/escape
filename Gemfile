@@ -39,6 +39,9 @@ gem 'pundit'
 gem 'rubocop-rails', require: false
 gem 'geocoder'
 gem 'commontator'
+gem 'caxlsx'
+gem 'caxlsx_rails'
+gem 'acts_as_caxlsx', git: 'https://github.com/caxlsx/acts_as_caxlsx.git'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
