@@ -82,8 +82,8 @@ GEM
       execjs (~> 2)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bootsnap (1.9.1)
-      msgpack (~> 1.0)
+    bootsnap (1.11.1)
+      msgpack (~> 1.2)
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
@@ -183,7 +183,7 @@ GEM
     minitest (5.14.4)
     momentjs-rails (2.20.1)
       railties (>= 3.1)
-    msgpack (1.4.2)
+    msgpack (1.4.5)
     multi_json (1.15.0)
     nio4r (2.5.8)
     nokogiri (1.12.5-x86_64-darwin)
@@ -331,7 +331,7 @@ DEPENDENCIES
   acts_as_caxlsx!
   ajax-datatables-rails
   bcrypt (~> 3.1.7)
-  bootsnap (>= 1.4.4)
+  bootsnap
   bootstrap-sass
   bootstrap3-datetimepicker-rails (~> 4.14.30)
   byebug
