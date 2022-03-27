@@ -36,7 +36,6 @@ class OrganizationsController < AuthorizedController
   def show
     gon.calendar_events_path = calendar_events_path(organization_id: @organization.id)
     authorize @organization
-    commontator_thread_show(@organization)
   end
 
   def new

@@ -1,4 +1,4 @@
-=javascript_pack_tag 'datepicker'
+= javascript_pack_tag 'datepicker', 'data-turbolinks-track': true
 = stylesheet_link_tag 'dhtmlxscheduler_material', media:'all','data-turbolinks-track': true
 = javascript_include_tag 'dhtmlxscheduler', 'data-turbolinks-track': true
 = javascript_include_tag 'ext/dhtmlxscheduler_limit', 'data-turbolinks-track': true
@@ -11,7 +11,8 @@
   %p Выберите организацию, в которой будет производиться резервация
   = select(:organization, :organization_id, Organization.all.order(name: 'asc').pluck(:name, :id), {}, {class: 'selectpicker w-50', data: {liveSearch: 'true'}})
   %p.mt-2 Выберите желаемую комнату:
-  = select(:room, :room_id, {}, {}, {class: 'selectpicker w-50'})
+  = select(:room, :room_id, {'1': 1, '2':2}, {}, {class: 'selectpicker w-50'})
+= Gon::Base.render_data
 #date-section
   %hr
   %h4 Дата
@@ -24,7 +25,6 @@
   #scheduler_here.dhx_cal_container{style: "width:60%; height:800px;"}
     .dhx_cal_header
     .dhx_cal_data
-  = Gon::Base.render_data
   = javascript_include_tag 'calendar_customer_form', 'data-turbolinks-track': true
 #services-section
   %hr
@@ -41,6 +41,6 @@
   %h4 Подтверждение
   %p Проверьте все данные и нажмите кнопку "Создать резервацию":
   %p Стоимось резервации:
-  %p#services-price Услуги: $0
-  %p#rental-price Аренда комнаты: $0
+  %p#services-price Услуги: 0 Руб.
+  %p#rental-price Аренда комнаты: 0 Руб.
   = button_tag 'Создать резервацию', class: 'btn btn-primary w-50', id: 'submit-button'

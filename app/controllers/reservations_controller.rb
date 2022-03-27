@@ -27,6 +27,7 @@ class ReservationsController < AuthorizedController
   end
 
   def create
+    gon.calendar_events_path = calendar_events_path
     authorize Reservation
     @reservation = Reservation.create(
       user_id: current_user.id,

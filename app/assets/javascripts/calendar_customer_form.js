@@ -94,7 +94,7 @@ scheduler.attachEvent("onEventSave",function(id,ev,is_new){
     },
     success: function (response) {
       console.log(response);
-      $("#rental-price").text('Room rental: $' + (Math.abs(ev.end_date - ev.start_date) / 36e5) * response.hourly_payment);
+      $("#rental-price").text('Аренда: ' + (Math.abs(ev.end_date - ev.start_date) / 36e5) * response.hourly_payment + ' руб.');
     }
   });
   
