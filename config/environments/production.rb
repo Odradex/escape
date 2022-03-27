@@ -58,9 +58,7 @@ Rails.application.configure do
   config.log_tags = [:request_id]
   config.assets.digest = true
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.asset_host = ENV['APPLICATION_HOST']
-  config.action_controller.asset_host = ENV['APPLICATION_HOST']
-  config.host = ENV['APPLICATION_HOST']
+  config.require_master_key = true
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 

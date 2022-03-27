@@ -86,5 +86,5 @@ test:
 production:
   <<: *default
   database: escape_production
-  username: escape
-  password: <%= ENV['ESCAPE_DATABASE_PASSWORD'] %>
+  username: escape_server
+  password: itechart
