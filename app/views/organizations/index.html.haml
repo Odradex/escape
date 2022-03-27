@@ -1,9 +1,5 @@
 =javascript_include_tag 'organizations_datatable'
 %h1.mb-3 Организации
-// link to report download
-= link_to 'Скачать отчет', report_path, method: 'get', class: 'btn btn-primary mb-3'
-= link_to 'Скачать список организаций', organizations_path(format: 'xlsx'), class: 'btn btn-primary mb-3'
-
 #map.mb-3
 %table.table.table-hover#organizations-datatable{"data-source" => "#{organizations_path(format: :json)}"}
   %thead
