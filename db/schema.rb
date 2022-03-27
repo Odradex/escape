@@ -149,11 +149,4 @@ ActiveRecord::Schema.define(version: 2022_03_16_154226) do
   add_foreign_key "commontator_subscriptions", "commontator_threads", column: "thread_id", on_update: :cascade, on_delete: :cascade
   add_foreign_key "events", "reservations"
   add_foreign_key "organizations", "users"
-  add_foreign_key "organizations", "users"
-  add_foreign_key "reservations", "events"
-  add_foreign_key "reservations", "rooms"
-  add_foreign_key "reservations", "users"
-  add_foreign_key "reservations_services", "reservations"
-  add_foreign_key "reservations_services", "services"
-  add_foreign_key "rooms", "organizations"
 end
