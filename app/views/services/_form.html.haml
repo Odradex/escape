@@ -8,7 +8,7 @@
           %li= error.full_message
   = form.label :category, 'Категория'
   .input-group.mb-3
-    = form.select :category_id, Service.categories, {}, {class: 'selectpicker', data: {liveSearch: 'true'}}
+    = form.select :category, Service.categories, {}, {class: 'selectpicker', data: {liveSearch: 'true'}}
   = form.label :name, 'Название'
   .input-group.mb-3
     = form.text_field :name, class: "form-control"

@@ -73,6 +73,6 @@ class ServicesController < AuthorizedController
   end
 
   def service_params
-    params.require(:service).permit(:name, :category_id, :price)
+    params.require(:service).permit(:name, :category, :price)
   end
 end

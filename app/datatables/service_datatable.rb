@@ -19,7 +19,7 @@ class ServiceDatatable < AjaxDatatablesRails::ActiveRecord
   def data
     records.map do |record|
       {
-        category: record.category,
+        category: Service.categories.find(record.category).first[0],
         name: record.name,
         price: record.price
       }
