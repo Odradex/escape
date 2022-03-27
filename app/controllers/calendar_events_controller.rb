@@ -25,7 +25,7 @@ class CalendarEventsController < ApplicationController
 
   def create
     event = Event.create start_date: @start_date, end_date: @end_date,
-                         text: 'Reservation', rec_type: @rec_type,
+                         text: 'Резервация', rec_type: @rec_type,
                          event_length: @event_length, event_pid: @event_pid, organization_id: @organization_id
     @reservation = Reservation.create user_id: @user_id, room_id: @room_id, event: event, service_ids: @services
     event.update(reservation: @reservation) if @reservation.save
