@@ -84,9 +84,22 @@ Rails.application.configure do
 
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
-
+  config.cache_classes = false
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  config.action_mailer.delivery_method = :smtp
+  host = 'protected-headland-68347.herokuapp.com' #replace with your own url
+  config.action_mailer.default_url_options = { host: host }
+
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => 'blankerbat@gmail.com',
+    :password             => 'gdisxbkrbargbhyd',
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
 
   # Use a different logger for distributed setups.
   # require "syslog/logger"
